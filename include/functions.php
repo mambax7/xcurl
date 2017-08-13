@@ -1,6 +1,9 @@
 <?php
 
 if (!function_exists('adminMenu')) {
+    /**
+     * @param int $currentoption
+     */
     function adminMenu($currentoption = 0)
     {
         /* Nice buttons styles */

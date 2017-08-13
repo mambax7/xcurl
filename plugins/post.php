@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function post_xsd()
 {
     $xsd          = array();
@@ -30,6 +33,10 @@ function post_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array|bool
+ */
 function post($var)
 {
     global $xoopsModuleConfig;

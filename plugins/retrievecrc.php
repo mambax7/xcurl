@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function retrievecrc_xsd()
 {
     $xsd                                    = array();
@@ -33,6 +36,10 @@ function retrievecrc_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array|bool
+ */
 function retrievecrc($var)
 {
     global $xoopsModuleConfig;

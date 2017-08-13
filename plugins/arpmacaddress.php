@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @return array
+ */
 function arpmacaddress_xsd()
 {
     $xsd                  = array();
@@ -28,6 +31,12 @@ $ret = explode(' ', XOOPS_VERSION);
 $ver = explode('.', $ret[1]);
 
 if ($ret[0] >= 2 && $ret[1] >= 3) {
+    /**
+     * @param $username
+     * @param $password
+     * @param $remoteaddress
+     * @return array|bool
+     */
     function arpmacaddress($username, $password, $remoteaddress)
     {
         global $xoopsModuleConfig, $xoopsConfig;

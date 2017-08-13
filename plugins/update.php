@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function update_xsd()
 {
     $xsd          = array();
@@ -30,6 +33,10 @@ function update_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array|bool|\mysqli_result
+ */
 function update($var)
 {
     global $xoopsModuleConfig;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @param $username
+ * @param $password
+ * @return bool
+ */
 function validateuser($username, $password)
 {
     global $xoopsDB;
@@ -11,6 +16,11 @@ function validateuser($username, $password)
     }
 }
 
+/**
+ * @param $username
+ * @param $password
+ * @return bool
+ */
 function user_uid($username, $password)
 {
     global $xoopsDB;
@@ -24,6 +34,12 @@ function user_uid($username, $password)
     }
 }
 
+/**
+ * @param $tbl_id
+ * @param $data
+ * @param $function
+ * @return bool
+ */
 function validate($tbl_id, $data, $function)
 {
     global $xoopsDB;
@@ -45,6 +61,12 @@ function validate($tbl_id, $data, $function)
     return $pass;
 }
 
+/**
+ * @param $function_file
+ * @param $username
+ * @param $password
+ * @return mixed
+ */
 function checkright($function_file, $username, $password)
 {
     $uid           = user_uid($username, $password);
@@ -85,6 +107,10 @@ function checkright($function_file, $username, $password)
     }
 }
 
+/**
+ * @param $tablename
+ * @return mixed
+ */
 function get_tableid($tablename)
 {
     global $xoopsDB;
@@ -94,6 +120,10 @@ function get_tableid($tablename)
     return $row['tbl_id'];
 }
 
+/**
+ * @param $tableid
+ * @return mixed
+ */
 function get_tablename($tableid)
 {
     global $xoopsDB;
@@ -103,6 +133,11 @@ function get_tablename($tableid)
     return $row['tablename'];
 }
 
+/**
+ * @param $fld_id
+ * @param $tbl_id
+ * @return mixed
+ */
 function get_fieldname($fld_id, $tbl_id)
 {
     global $xoopsDB;
@@ -112,6 +147,11 @@ function get_fieldname($fld_id, $tbl_id)
     return $row['fieldname'];
 }
 
+/**
+ * @param $fieldname
+ * @param $tbl_id
+ * @return bool
+ */
 function is_fieldkey($fieldname, $tbl_id)
 {
     global $xoopsDB;
@@ -126,6 +166,10 @@ function is_fieldkey($fieldname, $tbl_id)
 }
 
 if (!function_exists('xoops_isIPv6')) {
+    /**
+     * @param string $ip
+     * @return bool
+     */
     function xoops_isIPv6($ip = '')
     {
         if ($ip == '') {
@@ -141,6 +185,10 @@ if (!function_exists('xoops_isIPv6')) {
 }
 
 if (!function_exists('xoops_getUserIP')) {
+    /**
+     * @param bool $ip
+     * @return array
+     */
     function xoops_getUserIP($ip = false)
     {
         $ret = array();
@@ -194,6 +242,12 @@ if (!function_exists('xoops_getUserIP')) {
     }
 }
 
+/**
+ * @param $function_file
+ * @param $username
+ * @param $password
+ * @return array|bool
+ */
 function check_for_lock($function_file, $username, $password)
 {
     xoops_load('cache');
@@ -214,6 +268,12 @@ function check_for_lock($function_file, $username, $password)
     }
 }
 
+/**
+ * @param $function_file
+ * @param $username
+ * @param $password
+ * @return array
+ */
 function mark_for_lock($function_file, $username, $password)
 {
     xoops_load('cache');

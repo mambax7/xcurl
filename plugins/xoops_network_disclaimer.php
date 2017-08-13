@@ -1,6 +1,9 @@
 <?php
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 
+/**
+ * @return array
+ */
 function xoops_network_disclaimer_xsd()
 {
     $xsd    = array();
@@ -27,6 +30,11 @@ function xoops_network_disclaimer_wsdl_service()
 {
 }
 
+/**
+ * @param $username
+ * @param $password
+ * @return array|bool
+ */
 function xoops_network_disclaimer($username, $password)
 {
     global $xoopsModuleConfig, $xoopsConfig;

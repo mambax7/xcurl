@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function tableschemer_xsd()
 {
     $xsd                                    = array();
@@ -39,6 +42,10 @@ function tableschemer_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array|bool
+ */
 function tableschemer($var)
 {
     global $xoopsModuleConfig;

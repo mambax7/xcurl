@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function retrievekeys_xsd()
 {
     $xsd                                    = array();
@@ -35,6 +38,10 @@ function retrievekeys_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array|bool
+ */
 function retrievekeys($var)
 {
     global $xoopsModuleConfig;

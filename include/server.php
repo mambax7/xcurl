@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $objects
+ * @return array
+ */
 function obj2array($objects)
 {
     $ret = array();

@@ -16,11 +16,25 @@ if (!defined('usercheck_inc')) {
     if ($ret[0] >= 2 && $ret[1] >= 3) {
         xoops_load('userUtility');
 
+        /**
+         * @param $uname
+         * @param $email
+         * @param $pass
+         * @param $vpass
+         * @return bool|string
+         */
         function userCheck($uname, $email, $pass, $vpass)
         {
             return XoopsUserUtility::validate($uname, $email, $pass, $vpass);
         }
     } else {
+        /**
+         * @param $uname
+         * @param $email
+         * @param $pass
+         * @param $vpass
+         * @return string
+         */
         function userCheck($uname, $email, $pass, $vpass)
         {
             $configHandler   = xoops_getHandler('config');

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function tablesforupdate_xsd()
 {
     $xsd                                    = array();
@@ -26,6 +29,10 @@ function tablesforupdate_wsdl_service()
 {
 }
 
+/**
+ * @param $var
+ * @return array|bool|void
+ */
 function tablesforupdate($var)
 {
     global $xoopsModuleConfig;

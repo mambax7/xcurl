@@ -5,6 +5,9 @@ include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/siteinfocheck.php';
 include XOOPS_ROOT_PATH . '/class/xoopsmailer.php';
 include XOOPS_ROOT_PATH . '/class/xoopsuser.php';
 
+/**
+ * @return array
+ */
 function xoops_create_user_xsd()
 {
     $xsd      = array();
@@ -54,6 +57,13 @@ function xoops_create_user_wsdl_service()
 {
 }
 
+/**
+ * @param $username
+ * @param $password
+ * @param $user
+ * @param $siteinfo
+ * @return array|mixed
+ */
 function xoops_create_user($username, $password, $user, $siteinfo)
 {
     xoops_load('userUtility');

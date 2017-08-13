@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class ip2location_lite
+ */
 final class ip2location_lite
 {
     protected $errors  = array();
@@ -7,6 +10,9 @@ final class ip2location_lite
     protected $version = 'v3';
     protected $apiKey  = '';
 
+    /**
+     * ip2location_lite constructor.
+     */
     public function __construct()
     {
     }
@@ -15,6 +21,9 @@ final class ip2location_lite
     {
     }
 
+    /**
+     * @param $key
+     */
     public function setKey($key)
     {
         if (!empty($key)) {
@@ -22,21 +31,34 @@ final class ip2location_lite
         }
     }
 
+    /**
+     * @return string
+     */
     public function getError()
     {
         return implode("\n", $this->errors);
     }
 
+    /**
+     * @param $host
+     */
     public function getCountry($host)
     {
         return $this->getResult($host, 'ip-country');
     }
 
+    /**
+     * @param $host
+     */
     public function getCity($host)
     {
         return $this->getResult($host, 'ip-city');
     }
 
+    /**
+     * @param $host
+     * @param $name
+     */
     private function getResult($host, $name)
     {
         $ip = @gethostbyname($host);

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function spiderstat_xsd()
 {
     $xsd                                    = array();
@@ -34,6 +37,12 @@ function spiderstat_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $username
+ * @param $password
+ * @param $statistic
+ * @return array
+ */
 function spiderstat($username, $password, $statistic)
 {
     global $xoopsModuleConfig, $xoopsDB;

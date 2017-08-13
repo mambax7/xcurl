@@ -3,6 +3,9 @@ include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/siteinfocheck.php';
 
+/**
+ * @return array
+ */
 function xoops_check_activation_xsd()
 {
     $xsd                  = array();
@@ -41,6 +44,12 @@ function xoops_check_activation_wsdl_service()
 {
 }
 
+/**
+ * @param $username
+ * @param $password
+ * @param $user
+ * @return array
+ */
 function xoops_check_activation($username, $password, $user)
 {
     global $xoopsModuleConfig, $xoopsConfig;

@@ -2,6 +2,9 @@
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 
+/**
+ * @return array
+ */
 function xoops_user_validate_xsd()
 {
     $xsd     = array();
@@ -39,6 +42,12 @@ $ver = explode('.', $ret[1]);
 if ($ret[0] >= 2 && $ret[1] >= 3) {
     xoops_load('userUtility');
 
+    /**
+     * @param $username
+     * @param $password
+     * @param $validate
+     * @return array|bool
+     */
     function xoops_user_validate($username, $password, $validate)
     {
         global $xoopsModuleConfig, $xoopsConfig;
@@ -74,6 +83,12 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
     }
 } else { // LEGACY SUPPORT
 
+    /**
+     * @param $username
+     * @param $password
+     * @param $validate
+     * @return array|bool
+     */
     function xoops_user_validate($username, $password, $validate)
     {
         global $xoopsModuleConfig, $xoopsConfig;

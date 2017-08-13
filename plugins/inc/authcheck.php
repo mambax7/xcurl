@@ -1,5 +1,9 @@
 <?php
 if (!function_exists('check_auth_class')) {
+    /**
+     * @param $authclass
+     * @return bool
+     */
     function check_auth_class($authclass)
     {
         $class_methods = get_class_methods($authclass);

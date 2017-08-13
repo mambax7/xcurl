@@ -1,13 +1,23 @@
 <?php
 
+/**
+ * Class FunctionsHandler
+ */
 class FunctionsHandler
 {
     public $functions = array();
 
+    /**
+     * FunctionsHandler constructor.
+     * @param $wsdl
+     */
     public function __construct($wsdl)
     {
     }
 
+    /**
+     * @return array
+     */
     public function GetServerExtensions()
     {
         $files = array();
@@ -29,6 +39,10 @@ class FunctionsHandler
         return $f_buffer;
     }
 
+    /**
+     * @param $dirname
+     * @return array
+     */
     public function getDirListAsArray($dirname)
     {
         $ignored = array();
@@ -55,6 +69,11 @@ class FunctionsHandler
 
     /*
      *  gets list of all files in a directory
+     */
+    /**
+     * @param        $dirname
+     * @param string $prefix
+     * @return array
      */
     public function getFileListAsArray($dirname, $prefix = '')
     {

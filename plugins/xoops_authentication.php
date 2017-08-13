@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function xoops_authentication_xsd()
 {
     $xsd                                    = array();
@@ -48,6 +51,12 @@ function xoops_authentication_wsdl_service()
 {
 }
 
+/**
+ * @param $username
+ * @param $password
+ * @param $auth
+ * @return array|bool
+ */
 function xoops_authentication($username, $password, $auth)
 {
     global $xoopsModuleConfig, $xoopsConfig;

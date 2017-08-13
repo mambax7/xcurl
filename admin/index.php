@@ -508,11 +508,19 @@ switch ($op) {
 
 }
 
+/**
+ * @param $raw_tablename
+ * @return mixed
+ */
 function strip_prefix($raw_tablename)
 {
     return str_replace(XOOPS_DB_PREFIX . '_', '', $raw_tablename);
 }
 
+/**
+ * @param $raw_tablename
+ * @return array|false
+ */
 function get_tableconfig($raw_tablename)
 {
     global $xoopsDB;
@@ -524,6 +532,10 @@ function get_tableconfig($raw_tablename)
     }
 }
 
+/**
+ * @param $plugin_filename
+ * @return array|false
+ */
 function get_functionconfig($plugin_filename)
 {
     global $xoopsDB;
@@ -535,6 +547,11 @@ function get_functionconfig($plugin_filename)
     }
 }
 
+/**
+ * @param $raw_fieldname
+ * @param $tbl_id
+ * @return array|false
+ */
 function get_fieldconfig($raw_fieldname, $tbl_id)
 {
     global $xoopsDB;
@@ -546,6 +563,10 @@ function get_fieldconfig($raw_fieldname, $tbl_id)
     }
 }
 
+/**
+ * @param $tablename
+ * @return mixed
+ */
 function get_tableid($tablename)
 {
     global $xoopsDB;
@@ -555,6 +576,10 @@ function get_tableid($tablename)
     return $row['tbl_id'];
 }
 
+/**
+ * @param $tableid
+ * @return mixed
+ */
 function get_tablename($tableid)
 {
     global $xoopsDB;
@@ -564,6 +589,9 @@ function get_tablename($tableid)
     return $row['tablename'];
 }
 
+/**
+ * @return bool
+ */
 function compile_wsdl()
 {
     return true;

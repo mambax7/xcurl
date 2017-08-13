@@ -1,4 +1,7 @@
 <?php
+/**
+ * @return array
+ */
 function retrieve_xsd()
 {
     $xsd     = array();
@@ -34,6 +37,10 @@ function retrieve_wsdl_service()
 }
 
 // Define the method as a PHP function
+/**
+ * @param $var
+ * @return array
+ */
 function retrieve($var)
 {
     global $xoopsModuleConfig;
