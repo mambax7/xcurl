@@ -31,7 +31,7 @@ $funct = new FunctionsHandler();
 $FunctionDefine = array();
 foreach ($funct->GetServerExtensions() as $extension) {
     global $xoopsDB;
-    $sql = "SELECT count(*) rc FROM " . $xoopsDB->prefix('json_plugins') . " WHERE active = 1 AND plugin_file = '" . $extension . "'";
+    $sql = 'SELECT count(*) rc FROM ' . $xoopsDB->prefix('json_plugins') . " WHERE active = 1 AND plugin_file = '" . $extension . "'";
     $ret = $xoopsDB->query($sql);
     $row = $xoopsDB->fetchArray($ret);
     if ($row['rc'] == 1) {
@@ -65,10 +65,10 @@ foreach ($FunctionDefine as $id => $func) {
                         } elseif (!empty($field['name']) && !empty($field['type'])) {
                             switch ($field['type']) {
                                 default:
-                                case "string":
+                                case 'string':
                                     $tmp[$fields] = (string)$opdata[$field['name']];
                                     break;
-                                case "integer":
+                                case 'integer':
                                     $tmp[$fields] = (integer)$opdata[$field['name']];
                                     break;
                             }

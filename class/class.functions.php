@@ -19,7 +19,7 @@ class FunctionsHandler
         if ($f_count != count($files)) {
             $f_count = count($files);
             foreach ($files as $k => $l) {
-                if (strpos($k, ".php", 1) == (strlen($k) - 4)) {
+                if (strpos($k, '.php', 1) == (strlen($k) - 4)) {
                     $f[] = $k;
                 }
             }
@@ -56,7 +56,7 @@ class FunctionsHandler
     /*
      *  gets list of all files in a directory
      */
-    public function getFileListAsArray($dirname, $prefix = "")
+    public function getFileListAsArray($dirname, $prefix = '')
     {
         $filelist = array();
         if (substr($dirname, -1) == '/') {
