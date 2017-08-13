@@ -3,9 +3,9 @@ if (!defined('usercheck_inc')) {
     global $xoopsConfig;
 
     if (file_exists(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/user.php')) {
-        include(XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/user.php');
+        include XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/user.php';
     } else {
-        include(XOOPS_ROOT_PATH . '/language/english/user.php');
+        include XOOPS_ROOT_PATH . '/language/english/user.php';
     }
 
     define('usercheck_inc', true);
@@ -91,7 +91,7 @@ if (!defined('usercheck_inc')) {
             if (!isset($pass) || $pass == '' || !isset($vpass) || $vpass == '') {
                 $stop .= _US_ENTERPWD . '<br />';
             }
-            if ((isset($pass)) && ($pass != $vpass)) {
+            if (isset($pass) && ($pass != $vpass)) {
                 $stop .= _US_PASSNOTSAME . '<br />';
             } elseif (($pass != '') && (strlen($pass) < $xoopsConfigUser['minpass'])) {
                 $stop .= sprintf(_US_PWDTOOSHORT, $xoopsConfigUser['minpass']) . '<br />';

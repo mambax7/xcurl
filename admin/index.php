@@ -403,7 +403,7 @@ switch ($op) {
     case 'plugins':
         error_reporting(E_ALL);
         global $xoopsModuleConfig;
-        require_once('../class/class.functions.php');
+        require_once '../class/class.functions.php';
         $funct = new FunctionsHandler($xoopsModuleConfig['wsdl']);
 
         $FunctionDefine = array();

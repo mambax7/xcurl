@@ -1,7 +1,7 @@
 <?php
-include(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php');
-include(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php');
-include(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/siteinfocheck.php');
+include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
+include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
+include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/siteinfocheck.php';
 
 function xoops_check_activation_xsd()
 {

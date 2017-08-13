@@ -83,7 +83,7 @@ function spiderstat($username, $password, $statistic)
     $stat->setVar('when', $statistic['when']);
     $stat->setVar('sitename', $statistic['sitename']);
 
-    $status = ($statisticsHandler->insert($stat)) ? true : false;
+    $status = $statisticsHandler->insert($stat) ? true : false;
 
     $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('spiders_statistics') . " WHERE `when` < '" . (time() - (24 * 60 * 60 * 3)) . "'";
     @$GLOBALS['xoopsDB']->queryF($sql);

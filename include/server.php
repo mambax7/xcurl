@@ -19,10 +19,10 @@ $ttlresult = array();
 
 xoops_load('xoopscache');
 
-require_once(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/class/class.functions.php');
-require_once('common.php');
+require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/class/class.functions.php';
+require_once 'common.php';
 if (!function_exists('json_encode')) {
-    require_once('JSON.php');
+    require_once 'JSON.php';
     $json = new Services_JSON();
 }
 
@@ -35,7 +35,7 @@ foreach ($funct->GetServerExtensions() as $extension) {
     $ret = $xoopsDB->query($sql);
     $row = $xoopsDB->fetchArray($ret);
     if ($row['rc'] == 1) {
-        require_once(XOOPS_ROOT_PATH . '/modules/xjson/plugins/' . $extension);
+        require_once XOOPS_ROOT_PATH . '/modules/xjson/plugins/' . $extension;
         $FunctionDefine[] = substr($extension, 0, strlen($extension) - 4);
     }
 }

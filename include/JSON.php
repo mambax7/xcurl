@@ -523,7 +523,7 @@ class Services_JSON
 
                             case preg_match('/\\\u[0-9A-F]{4}/i', substr($chrs, $c, 6)):
                                 // single, escaped unicode character
-                                $utf16 = chr(hexdec(substr($chrs, ($c + 2), 2))) . chr(hexdec(substr($chrs, ($c + 4), 2)));
+                                $utf16 = chr(hexdec(substr($chrs, $c + 2, 2))) . chr(hexdec(substr($chrs, $c + 4, 2)));
                                 $utf8  .= $this->utf162utf8($utf16);
                                 $c     += 5;
                                 break;
@@ -615,8 +615,8 @@ class Services_JSON
                         if (($c == $strlen_chrs) || (($chrs{$c} == ',') && ($top['what'] == SERVICES_JSON_SLICE))) {
                             // found a comma that is not inside a string, array, etc.,
                             // OR we've reached the end of the character list
-                            $slice = substr($chrs, $top['where'], ($c - $top['where']));
-                            array_push($stk, array('what' => SERVICES_JSON_SLICE, 'where' => ($c + 1), 'delim' => false));
+                            $slice = substr($chrs, $top['where'], $c - $top['where']);
+                            array_push($stk, array('what' => SERVICES_JSON_SLICE, 'where' => $c + 1, 'delim' => false));
                             //print("Found split at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
 
                             if (reset($stk) == SERVICES_JSON_IN_ARR) {

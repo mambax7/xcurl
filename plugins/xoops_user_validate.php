@@ -1,6 +1,6 @@
 <?php
-include(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php');
-include(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php');
+include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
+include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 
 function xoops_user_validate_xsd()
 {

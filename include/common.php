@@ -2,7 +2,7 @@
 function validateuser($username, $password)
 {
     global $xoopsDB;
-    $sql = "select * from " . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password ? "'$password'" : "md5('$password')");
+    $sql = 'select * from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password ? "'$password'" : "md5('$password')");
     $ret = $xoopsDB->query($sql);
     if (!$xoopsDB->getRowsNum($ret)) {
         return false;
@@ -14,7 +14,7 @@ function validateuser($username, $password)
 function user_uid($username, $password)
 {
     global $xoopsDB;
-    $sql = "select uid from " . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password ? "'$password'" : "md5('$password')");
+    $sql = 'select uid from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password ? "'$password'" : "md5('$password')");
     $ret = $xoopsDB->query($sql);
     if (!$xoopsDB->getRowsNum($ret)) {
         return false;
@@ -27,14 +27,14 @@ function user_uid($username, $password)
 function validate($tbl_id, $data, $function)
 {
     global $xoopsDB;
-    $sql  = "select * from " . $xoopsDB->prefix('curl_tables') . " WHERE tablename = '" . get_tablename($tbl_id) . "' and $function = 1";
+    $sql  = 'select * from ' . $xoopsDB->prefix('curl_tables') . " WHERE tablename = '" . get_tablename($tbl_id) . "' and $function = 1";
     $ret  = $xoopsDB->query($sql);
     $pass = true;
     if (!$xoopsDB->getRowsNum($ret)) {
         $pass = false;
     } else {
         foreach ($data as $row) {
-            $sql = "select * from " . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and $function = 1 and fieldname = '" . $row['field'] . "'";
+            $sql = 'select * from ' . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and $function = 1 and fieldname = '" . $row['field'] . "'";
             $ret = $xoopsDB->query($sql);
             if (!$xoopsDB->getRowsNum($ret) && !is_fieldkey($row['field'], $tbl_id)) {
                 $pass = false;
@@ -55,13 +55,13 @@ function checkright($function_file, $username, $password)
         $rUser         = new XoopsUser($uid);
         $gpermHandler  = xoops_getHandler('groupperm');
         $groups        = is_object($rUser) ? $rUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
-        $sql           = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
+        $sql           = 'SELECT plugin_id FROM ' . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
         $ret           = $xoopsDB->queryF($sql);
         $row           = $xoopsDB->fetchArray($ret);
         $item_id       = $row['plugin_id'];
         $modid         = $xoModule->getVar('mid');
         $onlineHandler = xoops_getHandler('online');
-        $onlineHandler->write($uid, $username, time(), $modid, (string)$_SERVER["REMOTE_ADDR"]);
+        $onlineHandler->write($uid, $username, time(), $modid, (string)$_SERVER['REMOTE_ADDR']);
         $memberHandler = xoops_getHandler('member');
         @ini_set('session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60);
         session_set_saveHandler(array(&$sessHandler, 'open'), array(&$sessHandler, 'close'), array(&$sessHandler, 'read'), array(&$sessHandler, 'write'), array(&$sessHandler, 'destroy'), array(&$sessHandler, 'gc'));
@@ -76,7 +76,7 @@ function checkright($function_file, $username, $password)
         global $xoopsDB, $xoopsModule;
         $gpermHandler = xoops_getHandler('groupperm');
         $groups       = array(XOOPS_GROUP_ANONYMOUS);
-        $sql          = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
+        $sql          = 'SELECT plugin_id FROM ' . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
         $ret          = $xoopsDB->queryF($sql);
         $row          = $xoopsDB->fetchArray($ret);
         $item_id      = $row['plugin_id'];
@@ -88,7 +88,7 @@ function checkright($function_file, $username, $password)
 function get_tableid($tablename)
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM " . $xoopsDB->prefix('curl_tables') . " WHERE tablename = '$tablename'";
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_tables') . " WHERE tablename = '$tablename'";
     $ret = $xoopsDB->query($sql);
     $row = $xoopsDB->fetchArray($ret);
     return $row['tbl_id'];
@@ -97,7 +97,7 @@ function get_tableid($tablename)
 function get_tablename($tableid)
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM " . $xoopsDB->prefix('curl_tables') . " WHERE tbl_id = '$tableid'";
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_tables') . " WHERE tbl_id = '$tableid'";
     $ret = $xoopsDB->query($sql);
     $row = $xoopsDB->fetchArray($ret);
     return $row['tablename'];
@@ -106,7 +106,7 @@ function get_tablename($tableid)
 function get_fieldname($fld_id, $tbl_id)
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM " . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and fld_id = '$fld_id'";
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and fld_id = '$fld_id'";
     $ret = $xoopsDB->query($sql);
     $row = $xoopsDB->fetchArray($ret);
     return $row['fieldname'];
@@ -115,7 +115,7 @@ function get_fieldname($fld_id, $tbl_id)
 function is_fieldkey($fieldname, $tbl_id)
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM " . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and fieldname = '$fieldname' and `key` = 1";
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_fields') . " WHERE tbl_id = '$tbl_id' and fieldname = '$fieldname' and `key` = 1";
     //echo $sql."\n";
     $ret = $xoopsDB->query($sql);
     if (!$xoopsDB->getRowsNum($ret)) {
@@ -126,13 +126,13 @@ function is_fieldkey($fieldname, $tbl_id)
 }
 
 if (!function_exists('xoops_isIPv6')) {
-    function xoops_isIPv6($ip = "")
+    function xoops_isIPv6($ip = '')
     {
-        if ($ip == "") {
+        if ($ip == '') {
             return false;
         }
 
-        if (substr_count($ip, ":") > 0) {
+        if (substr_count($ip, ':') > 0) {
             return true;
         } else {
             return false;
@@ -153,10 +153,10 @@ if (!function_exists('xoops_getUserIP')) {
         }
         $ret['sessionid'] = session_id();
         if (!$ip) {
-            if ($_SERVER["HTTP_X_FORWARDED_FOR"] != "") {
-                $ip                  = (string)$_SERVER["HTTP_X_FORWARDED_FOR"];
+            if ($_SERVER['HTTP_X_FORWARDED_FOR'] != '') {
+                $ip                  = (string)$_SERVER['HTTP_X_FORWARDED_FOR'];
                 $ret['is_proxied']   = true;
-                $proxy_ip            = $_SERVER["REMOTE_ADDR"];
+                $proxy_ip            = $_SERVER['REMOTE_ADDR'];
                 $ret['network-addy'] = @gethostbyaddr($ip);
                 $ret['long']         = @ip2long($ip);
                 if (xoops_isIPv6($ip)) {
@@ -168,7 +168,7 @@ if (!function_exists('xoops_getUserIP')) {
                 }
             } else {
                 $ret['is_proxied']   = false;
-                $ip                  = (string)$_SERVER["REMOTE_ADDR"];
+                $ip                  = (string)$_SERVER['REMOTE_ADDR'];
                 $ret['network-addy'] = @gethostbyaddr($ip);
                 $ret['long']         = @ip2long($ip);
                 if (xoops_isIPv6($ip)) {
@@ -205,7 +205,7 @@ function check_for_lock($function_file, $username, $password)
                 || $ret['made'] < ((time() - $GLOBALS['xoopsModuleConfig']['lock_seconds']) + mt_rand(1, $GLOBALS['xoopsModuleConfig']['lock_random_seed']))) {
                 unset($result[$id]);
             } elseif ($ret['md5'] == $userip['md5']) {
-                $retn = array('ErrNum' => 9, "ErrDesc" => 'No Permission for plug-in');
+                $retn = array('ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in');
             }
         }
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
@@ -223,11 +223,11 @@ function mark_for_lock($function_file, $username, $password)
         $result[] = $userip;
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
         XoopsCache::write('lock_' . $function_file . '_' . $username, $result, $GLOBALS['cache_seconds']);
-        return array('ErrNum' => 9, "ErrDesc" => 'No Permission for plug-in');
+        return array('ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in');
     } else {
         $result[] = $userip;
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
         XoopsCache::write('lock_' . $function_file . '_' . $username, $result, $GLOBALS['cache_seconds']);
-        return array('ErrNum' => 9, "ErrDesc" => 'No Permission for plug-in');
+        return array('ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in');
     }
 }
