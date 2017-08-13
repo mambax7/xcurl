@@ -1,8 +1,8 @@
 <?php
 
-include 'admin_header.php';
+include __DIR__ . '/admin_header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once '../include/functions.php';
+include_once __DIR__ . '/../include/functions.php';
 
 error_reporting(E_ALL);
 global $xoopsDB;
@@ -185,7 +185,7 @@ switch ($op) {
         $form_fld->addElement(new XoopsFormHidden("tbl_id", $tbl_id));
         $form_fld->addElement(new XoopsFormHidden("op", "savefields"));
         $form_fld->addElement(new XoopsFormHidden("new", $new));
-        $form_fld->addElement(new XoopsFormButton('', 'send', _SEND, 'submit'));
+        $form_fld->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
         xoops_cp_header();
         adminMenu(2);
         $form_sel->display();
@@ -374,7 +374,7 @@ switch ($op) {
 
         $form_view->addElement(new XoopsFormHidden("op", "saveviews"));
         $form_view->addElement(new XoopsFormHidden("new", $new));
-        $form_view->addElement(new XoopsFormButton('', 'send', _SEND, 'submit'));
+        $form_view->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         adminMenu(3);
@@ -458,7 +458,7 @@ switch ($op) {
 
         $form_plugin->addElement(new XoopsFormHidden("op", "saveplugins"));
         $form_plugin->addElement(new XoopsFormHidden("new", $new));
-        $form_plugin->addElement(new XoopsFormButton('', 'send', _SEND, 'submit'));
+        $form_plugin->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         adminMenu(4);
@@ -527,7 +527,7 @@ switch ($op) {
 
         $form_tables->addElement(new XoopsFormHidden("op", "savetables"));
         $form_tables->addElement(new XoopsFormHidden("new", $new));
-        $form_tables->addElement(new XoopsFormButton('', 'send', _SEND, 'submit'));
+        $form_tables->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         adminMenu(1);

@@ -73,7 +73,7 @@ function xoops_check_activation($username, $password, $user)
     include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
     $xoopsAuth =& XoopsAuthFactory::getAuthConnection(addslashes($uname));
 
-    if (check_auth_class($xoopsAuth) == true) {
+    if (check_auth_class($xoopsAuth) === true) {
         $result = $xoopsAuth->check_activation($uname, $actkey, $siteinfo);
         return $result;
     } else {
@@ -84,8 +84,8 @@ function xoops_check_activation($username, $password, $user)
         $ret = $xoopsDB->query($sql);
         $row = $xoopsDB->fetchArray($ret);
 
-        $member_handler =& xoops_gethandler('member');
-        $thisuser       =& $member_handler->getUser($row['uid']);
+        $memberHandler = xoops_getHandler('member');
+        $thisuser       = $memberHandler->getUser($row['uid']);
         if (!is_object($thisuser)) {
             exit();
         }
@@ -95,11 +95,11 @@ function xoops_check_activation($username, $password, $user)
             if ($thisuser->getVar('level') > 0) {
                 $return = array("state" => _US_STATE_ONE, "action" => "redirect_header", "url" => 'user.php', "opt" => 5, "text" => _US_ACONTACT, "set" => false);
             } else {
-                if (false != $member_handler->activateUser($thisuser)) {
-                    $config_handler  =& xoops_gethandler('config');
-                    $xoopsConfigUser = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+                if (false != $memberHandler->activateUser($thisuser)) {
+                    $configHandler  = xoops_getHandler('config');
+                    $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
                     if ($xoopsConfigUser['activation_type'] == 2) {
-                        $myts        =& MyTextSanitizer::getInstance();
+                        $myts        = MyTextSanitizer::getInstance();
                         $xoopsMailer =& xoops_getMailer();
                         $xoopsMailer->useMail();
                         $xoopsMailer->setTemplate('activated.tpl');

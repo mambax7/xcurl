@@ -48,23 +48,23 @@ function spiderstat($username, $password, $statistic)
         }
     }
 
-    $spider_handler = &xoops_getmodulehandler('spiders', 'spiders');
-    $member_handler = &xoops_gethandler('member');
+    $spiderHandler =  xoops_getModuleHandler('spiders', 'spiders');
+    $memberHandler =  xoops_getHandler('member');
 
-    $modulehandler =& xoops_gethandler('module');
-    $confighandler =& xoops_gethandler('config');
+    $modulehandler = xoops_getHandler('module');
+    $confighandler = xoops_getHandler('config');
     $xoModule      = $modulehandler->getByDirname('spiders');
     $xoConfig      = $confighandler->getConfigList($xoModule->getVar('mid'), false);
 
-    $statistics_handler =& xoops_getmodulehandler('statistics', 'spiders');
+    $statisticsHandler = xoops_getModuleHandler('statistics', 'spiders');
 
-    $ban = $spider_handler->banDetails($statistic['netaddy']);
+    $ban = $spiderHandler->banDetails($statistic['netaddy']);
 
-    if ($ban != false) {
+    if ($ban !== false) {
         return array("ban_made" => $ban, "made" => time());
     }
 
-    $spiders = $spider_handler->getObjects(null);
+    $spiders = $spiderHandler->getObjects(null);
 
     foreach ($spiders as $spider) {
         if (strtolower($spider->getVar('robot-id')) == strtolower($statistic['robot-id'])) {
@@ -73,7 +73,7 @@ function spiderstat($username, $password, $statistic)
         }
     }
 
-    $stat = $statistics_handler->create();
+    $stat = $statisticsHandler->create();
     $stat->setVar('id', $id);
     $stat->setVar('useragent', $statistic['useragent']);
     $stat->setVar('uri', $statistic['uri']);
@@ -83,7 +83,7 @@ function spiderstat($username, $password, $statistic)
     $stat->setVar('when', $statistic['when']);
     $stat->setVar('sitename', $statistic['sitename']);
 
-    $status = ($statistics_handler->insert($stat)) ? true : false;
+    $status = ($statisticsHandler->insert($stat)) ? true : false;
 
     $sql = "DELETE FROM " . $GLOBALS['xoopsDB']->prefix('spiders_statistics') . " WHERE `when` < '" . (time() - (24 * 60 * 60 * 3)) . "'";
     @$GLOBALS['xoopsDB']->queryF($sql);
