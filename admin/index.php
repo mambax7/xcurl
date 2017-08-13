@@ -76,7 +76,7 @@ switch ($op) {
                 $other = 1;
             }
 
-            if ($keytype == 'PRI') {
+            if ($keytype === 'PRI') {
                 $key = 1;
             }
             $tbldat = get_fieldconfig($fieldname, $tbl_id);

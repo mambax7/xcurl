@@ -47,12 +47,12 @@ class FunctionsHandler
     {
         $ignored = array();
         $list    = array();
-        if (substr($dirname, -1) != '/') {
+        if (substr($dirname, -1) !== '/') {
             $dirname .= '/';
         }
         if ($handle = opendir($dirname)) {
             while ($file = readdir($handle)) {
-                if (substr($file, 0, 1) == '.' || in_array(strtolower($file), $ignored)) {
+                if (substr($file, 0, 1) === '.' || in_array(strtolower($file), $ignored)) {
                     continue;
                 }
                 if (is_dir($dirname . $file)) {
@@ -78,7 +78,7 @@ class FunctionsHandler
     public function getFileListAsArray($dirname, $prefix = '')
     {
         $filelist = array();
-        if (substr($dirname, -1) == '/') {
+        if (substr($dirname, -1) === '/') {
             $dirname = substr($dirname, 0, -1);
         }
         if (is_dir($dirname) && $handle = opendir($dirname)) {

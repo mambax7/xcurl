@@ -64,7 +64,7 @@ function xoops_check_activation($username, $password, $user)
         }
     }
 
-    if ($user['passhash'] != '') {
+    if ($user['passhash'] !== '') {
         if ($user['passhash'] != sha1(($user['time'] - $user['rand']) . $user['uname'] . $user['actkey'])) {
             return array('ERRNUM' => 4, 'ERRTXT' => 'No Passhash');
         }

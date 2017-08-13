@@ -69,7 +69,7 @@ function retrieve($var)
     } else {
         $sql = 'SELECT ';
         foreach ($var['data'] as $data) {
-            if ($data['field'] == '*') {
+            if ($data['field'] === '*') {
                 return array('ErrNum' => 7, 'ErrDesc' => 'Wildcard not accepted');
             }
 

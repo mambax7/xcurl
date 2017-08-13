@@ -62,7 +62,7 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
             }
         }
 
-        if ($validate['passhash'] != '') {
+        if ($validate['passhash'] !== '') {
             if ($validate['passhash'] != sha1(($validate['time'] - $validate['rand']) . $validate['uname'] . $validate['pass'])) {
                 return array('ERRNUM' => 4, 'ERRTXT' => 'No Passhash');
             }
@@ -103,7 +103,7 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
             }
         }
 
-        if ($validate['passhash'] != '') {
+        if ($validate['passhash'] !== '') {
             if ($validate['passhash'] != sha1(($validate['time'] - $validate['rand']) . $validate['uname'] . $validate['pass'])) {
                 return array('ERRNUM' => 4, 'ERRTXT' => 'No Passhash');
             }

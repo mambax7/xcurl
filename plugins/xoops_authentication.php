@@ -71,7 +71,7 @@ function xoops_authentication($username, $password, $auth)
         }
     }
 
-    if ($auth['passhash'] != '') {
+    if ($auth['passhash'] !== '') {
         if ($auth['passhash'] != sha1(($auth['time'] - $auth['rand']) . $auth['username'] . $auth['password'])) {
             return array('ERRNUM' => 4, 'ERRTXT' => 'No Passhash');
         }

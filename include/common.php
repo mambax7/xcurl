@@ -172,7 +172,7 @@ if (!function_exists('xoops_isIPv6')) {
      */
     function xoops_isIPv6($ip = '')
     {
-        if ($ip == '') {
+        if ($ip === '') {
             return false;
         }
 
@@ -201,7 +201,7 @@ if (!function_exists('xoops_getUserIP')) {
         }
         $ret['sessionid'] = session_id();
         if (!$ip) {
-            if ($_SERVER['HTTP_X_FORWARDED_FOR'] != '') {
+            if ($_SERVER['HTTP_X_FORWARDED_FOR'] !== '') {
                 $ip                  = (string)$_SERVER['HTTP_X_FORWARDED_FOR'];
                 $ret['is_proxied']   = true;
                 $proxy_ip            = $_SERVER['REMOTE_ADDR'];

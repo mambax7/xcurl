@@ -80,7 +80,7 @@ function xoops_create_user($username, $password, $user, $siteinfo)
         }
     }
 
-    if ($user['passhash'] != '') {
+    if ($user['passhash'] !== '') {
         if ($user['passhash'] != sha1(($user['time'] - $user['rand']) . $user['uname'] . $user['pass'])) {
             return array('ERRNUM' => 4, 'ERRTXT' => 'No Passhash');
         }
@@ -110,7 +110,7 @@ function xoops_create_user($username, $password, $user, $siteinfo)
             $newuser->setVar('user_viewemail', $user_viewemail, true);
             $newuser->setVar('uname', $uname, true);
             $newuser->setVar('email', $email, true);
-            if ($url != '') {
+            if ($url !== '') {
                 $newuser->setVar('url', formatURL($url), true);
             }
             $newuser->setVar('user_avatar', 'blank.gif', true);
