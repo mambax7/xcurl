@@ -410,7 +410,7 @@ class Services_JSON
             return $encoded_value;
         }
 
-        return $this->encode(strval($name)) . ':' . $encoded_value;
+        return $this->encode((string)$name) . ':' . $encoded_value;
     }
 
     /**

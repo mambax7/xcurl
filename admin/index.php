@@ -206,56 +206,34 @@ switch ($op) {
                            . " (tbl_id, fieldname, allowpost, allowretrieve, allowupdate, visible, `key`, `string`, `int`, `float`, `text`, `other`, `crc`) VALUES ('$tbl_id','"
                            . addslashes($fieldname[$tt])
                            . "','"
-                           . intval($post[$tt])
-                           . "','"
-                           . intval($retrieve[$tt])
-                           . "','"
-                           . intval($update[$tt])
-                           . "','"
-                           . intval($visible[$tt])
-                           . "','"
-                           . intval($key[$tt])
-                           . "','"
-                           . intval($string[$tt])
-                           . "','"
-                           . intval($int[$tt])
-                           . "','"
-                           . intval($float[$tt])
-                           . "','"
-                           . intval($text[$tt])
-                           . "','"
-                           . intval($other[$tt])
-                           . "','"
-                           . intval($crc[$tt])
-                           . "')";
+                           . (int)$post[$tt] . "','"
+                           . (int)$retrieve[$tt] . "','"
+                           . (int)$update[$tt] . "','"
+                           . (int)$visible[$tt] . "','"
+                           . (int)$key[$tt] . "','"
+                           . (int)$string[$tt] . "','"
+                           . (int)$int[$tt] . "','"
+                           . (int)$float[$tt] . "','"
+                           . (int)$text[$tt] . "','"
+                           . (int)$other[$tt] . "','"
+                           . (int)$crc[$tt] . "')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
                     $sql = 'UPDATE '
                            . $xoopsDB->prefix('curl_fields')
                            . " SET allowpost ='"
-                           . intval($post[$tt])
-                           . "', allowupdate ='"
-                           . intval($update[$tt])
-                           . "',allowretrieve = '"
-                           . intval($retrieve[$tt])
-                           . "', visible='"
-                           . intval($visible[$tt])
-                           . "',`key` ='"
-                           . intval($key[$tt])
-                           . "', `string` = '"
-                           . intval($string[$tt])
-                           . "', `int`='"
-                           . intval($int[$tt])
-                           . "',`float` ='"
-                           . intval($float[$tt])
-                           . "', `text` = '"
-                           . intval($text[$tt])
-                           . "', `other`='"
-                           . intval($other[$tt])
-                           . "', crc = '"
-                           . intval($crc[$tt])
-                           . "' WHERE fld_id = "
+                           . (int)$post[$tt] . "', allowupdate ='"
+                           . (int)$update[$tt] . "',allowretrieve = '"
+                           . (int)$retrieve[$tt] . "', visible='"
+                           . (int)$visible[$tt] . "',`key` ='"
+                           . (int)$key[$tt] . "', `string` = '"
+                           . (int)$string[$tt] . "', `int`='"
+                           . (int)$int[$tt] . "',`float` ='"
+                           . (int)$float[$tt] . "', `text` = '"
+                           . (int)$text[$tt] . "', `other`='"
+                           . (int)$other[$tt] . "', crc = '"
+                           . (int)$crc[$tt] . "' WHERE fld_id = "
                            . $id[$tt]
                            . ' and tbl_id = '
                            . $tbl_id;
@@ -276,18 +254,14 @@ switch ($op) {
                            . " (tablename, allowpost, allowretrieve, allowupdate, visible, view) VALUES ('"
                            . addslashes($tablename[$tt])
                            . "','"
-                           . intval($post[$tt])
-                           . "','"
-                           . intval($retrieve[$tt])
-                           . "','"
-                           . intval($update[$tt])
-                           . "','"
-                           . intval($visible[$tt])
-                           . "','0')";
+                           . (int)$post[$tt] . "','"
+                           . (int)$retrieve[$tt] . "','"
+                           . (int)$update[$tt] . "','"
+                           . (int)$visible[$tt] . "','0')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
-                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_tables') . " SET allowpost ='" . intval($post[$tt]) . "', allowretrieve = '" . intval($retrieve[$tt]) . "', allowupdate = '" . intval($update[$tt]) . "', visible='" . intval($visible[$tt]) . "' WHERE tbl_id = " . $id[$tt];
+                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_tables') . " SET allowpost ='" . (int)$post[$tt] . "', allowretrieve = '" . (int)$retrieve[$tt] . "', allowupdate = '" . (int)$update[$tt] . "', visible='" . (int)$visible[$tt] . "' WHERE tbl_id = " . $id[$tt];
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
@@ -305,18 +279,14 @@ switch ($op) {
                            . " (tablename, allowpost, allowretrieve, allowupdate, visible, view) VALUES ('"
                            . addslashes($tablename[$tt])
                            . "','"
-                           . intval($post[$tt])
-                           . "','"
-                           . intval($retrieve[$tt])
-                           . "','"
-                           . intval($update[$tt])
-                           . "','"
-                           . intval($visible[$tt])
-                           . "','1')";
+                           . (int)$post[$tt] . "','"
+                           . (int)$retrieve[$tt] . "','"
+                           . (int)$update[$tt] . "','"
+                           . (int)$visible[$tt] . "','1')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
-                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_tables') . " SET allowpost ='" . intval($post[$tt]) . "', allowretrieve = '" . intval($retrieve[$tt]) . "', allowupdate = '" . intval($update[$tt]) . "', visible='" . intval($visible[$tt]) . "' WHERE tbl_id = " . $id[$tt];
+                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_tables') . " SET allowpost ='" . (int)$post[$tt] . "', allowretrieve = '" . (int)$retrieve[$tt] . "', allowupdate = '" . (int)$update[$tt] . "', visible='" . (int)$visible[$tt] . "' WHERE tbl_id = " . $id[$tt];
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
@@ -389,11 +359,11 @@ switch ($op) {
             $tt++;
             switch ($f) {
                 case 'new':
-                    $sql = 'INSERT INTO ' . $xoopsDB->prefix('curl_plugins') . " (plugin_name, plugin_file, active) VALUES ('" . addslashes($functionname[$tt]) . "','" . addslashes($filename[$tt]) . "','" . intval($active[$tt]) . "')";
+                    $sql = 'INSERT INTO ' . $xoopsDB->prefix('curl_plugins') . " (plugin_name, plugin_file, active) VALUES ('" . addslashes($functionname[$tt]) . "','" . addslashes($filename[$tt]) . "','" . (int)$active[$tt] . "')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
-                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_plugins') . " SET active ='" . intval($active[$tt]) . "' WHERE plugin_id = " . $id[$tt];
+                    $sql = 'UPDATE ' . $xoopsDB->prefix('curl_plugins') . " SET active ='" . (int)$active[$tt] . "' WHERE plugin_id = " . $id[$tt];
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
