@@ -206,34 +206,56 @@ switch ($op) {
                            . " (tbl_id, fieldname, allowpost, allowretrieve, allowupdate, visible, `key`, `string`, `int`, `float`, `text`, `other`, `crc`) VALUES ('$tbl_id','"
                            . addslashes($fieldname[$tt])
                            . "','"
-                           . (int)$post[$tt] . "','"
-                           . (int)$retrieve[$tt] . "','"
-                           . (int)$update[$tt] . "','"
-                           . (int)$visible[$tt] . "','"
-                           . (int)$key[$tt] . "','"
-                           . (int)$string[$tt] . "','"
-                           . (int)$int[$tt] . "','"
-                           . (int)$float[$tt] . "','"
-                           . (int)$text[$tt] . "','"
-                           . (int)$other[$tt] . "','"
-                           . (int)$crc[$tt] . "')";
+                           . (int)$post[$tt]
+                           . "','"
+                           . (int)$retrieve[$tt]
+                           . "','"
+                           . (int)$update[$tt]
+                           . "','"
+                           . (int)$visible[$tt]
+                           . "','"
+                           . (int)$key[$tt]
+                           . "','"
+                           . (int)$string[$tt]
+                           . "','"
+                           . (int)$int[$tt]
+                           . "','"
+                           . (int)$float[$tt]
+                           . "','"
+                           . (int)$text[$tt]
+                           . "','"
+                           . (int)$other[$tt]
+                           . "','"
+                           . (int)$crc[$tt]
+                           . "')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
                     $sql = 'UPDATE '
                            . $xoopsDB->prefix('curl_fields')
                            . " SET allowpost ='"
-                           . (int)$post[$tt] . "', allowupdate ='"
-                           . (int)$update[$tt] . "',allowretrieve = '"
-                           . (int)$retrieve[$tt] . "', visible='"
-                           . (int)$visible[$tt] . "',`key` ='"
-                           . (int)$key[$tt] . "', `string` = '"
-                           . (int)$string[$tt] . "', `int`='"
-                           . (int)$int[$tt] . "',`float` ='"
-                           . (int)$float[$tt] . "', `text` = '"
-                           . (int)$text[$tt] . "', `other`='"
-                           . (int)$other[$tt] . "', crc = '"
-                           . (int)$crc[$tt] . "' WHERE fld_id = "
+                           . (int)$post[$tt]
+                           . "', allowupdate ='"
+                           . (int)$update[$tt]
+                           . "',allowretrieve = '"
+                           . (int)$retrieve[$tt]
+                           . "', visible='"
+                           . (int)$visible[$tt]
+                           . "',`key` ='"
+                           . (int)$key[$tt]
+                           . "', `string` = '"
+                           . (int)$string[$tt]
+                           . "', `int`='"
+                           . (int)$int[$tt]
+                           . "',`float` ='"
+                           . (int)$float[$tt]
+                           . "', `text` = '"
+                           . (int)$text[$tt]
+                           . "', `other`='"
+                           . (int)$other[$tt]
+                           . "', crc = '"
+                           . (int)$crc[$tt]
+                           . "' WHERE fld_id = "
                            . $id[$tt]
                            . ' and tbl_id = '
                            . $tbl_id;
@@ -254,10 +276,14 @@ switch ($op) {
                            . " (tablename, allowpost, allowretrieve, allowupdate, visible, view) VALUES ('"
                            . addslashes($tablename[$tt])
                            . "','"
-                           . (int)$post[$tt] . "','"
-                           . (int)$retrieve[$tt] . "','"
-                           . (int)$update[$tt] . "','"
-                           . (int)$visible[$tt] . "','0')";
+                           . (int)$post[$tt]
+                           . "','"
+                           . (int)$retrieve[$tt]
+                           . "','"
+                           . (int)$update[$tt]
+                           . "','"
+                           . (int)$visible[$tt]
+                           . "','0')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
@@ -279,10 +305,14 @@ switch ($op) {
                            . " (tablename, allowpost, allowretrieve, allowupdate, visible, view) VALUES ('"
                            . addslashes($tablename[$tt])
                            . "','"
-                           . (int)$post[$tt] . "','"
-                           . (int)$retrieve[$tt] . "','"
-                           . (int)$update[$tt] . "','"
-                           . (int)$visible[$tt] . "','1')";
+                           . (int)$post[$tt]
+                           . "','"
+                           . (int)$retrieve[$tt]
+                           . "','"
+                           . (int)$update[$tt]
+                           . "','"
+                           . (int)$visible[$tt]
+                           . "','1')";
                     $ty  = $xoopsDB->queryF($sql);
                     break;
                 default:
