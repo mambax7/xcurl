@@ -47,19 +47,19 @@ function validate($tbl_id, $data, $function)
 
 function checkright($function_file, $username, $password)
 {
-    $uid            = user_uid($username, $password);
+    $uid           = user_uid($username, $password);
     $moduleHandler = xoops_getHandler('module');
-    $xoModule       = $moduleHandler->getByDirname('xcurl');
+    $xoModule      = $moduleHandler->getByDirname('xcurl');
     if ($uid <> 0) {
         global $xoopsDB, $xoopsModule;
-        $rUser          = new XoopsUser($uid);
+        $rUser         = new XoopsUser($uid);
         $gpermHandler  = xoops_getHandler('groupperm');
-        $groups         = is_object($rUser) ? $rUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
-        $sql            = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
-        $ret            = $xoopsDB->queryF($sql);
-        $row            = $xoopsDB->fetchArray($ret);
-        $item_id        = $row['plugin_id'];
-        $modid          = $xoModule->getVar('mid');
+        $groups        = is_object($rUser) ? $rUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+        $sql           = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
+        $ret           = $xoopsDB->queryF($sql);
+        $row           = $xoopsDB->fetchArray($ret);
+        $item_id       = $row['plugin_id'];
+        $modid         = $xoModule->getVar('mid');
         $onlineHandler = xoops_getHandler('online');
         $onlineHandler->write($uid, $username, time(), $modid, (string)$_SERVER["REMOTE_ADDR"]);
         $memberHandler = xoops_getHandler('member');
@@ -67,7 +67,7 @@ function checkright($function_file, $username, $password)
         session_set_saveHandler(array(&$sessHandler, 'open'), array(&$sessHandler, 'close'), array(&$sessHandler, 'read'), array(&$sessHandler, 'write'), array(&$sessHandler, 'destroy'), array(&$sessHandler, 'gc'));
         session_start();
         $_SESSION['xoopsUserId']     = $uid;
-        $GLOBALS['xoopsUser']        =  $memberHandler->getUser($uid);
+        $GLOBALS['xoopsUser']        = $memberHandler->getUser($uid);
         $_SESSION['xoopsUserGroups'] = $GLOBALS['xoopsUser']->getGroups();
         $GLOBALS['sessHandler']->update_cookie();
 
@@ -75,12 +75,12 @@ function checkright($function_file, $username, $password)
     } else {
         global $xoopsDB, $xoopsModule;
         $gpermHandler = xoops_getHandler('groupperm');
-        $groups        = array(XOOPS_GROUP_ANONYMOUS);
-        $sql           = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
-        $ret           = $xoopsDB->queryF($sql);
-        $row           = $xoopsDB->fetchArray($ret);
-        $item_id       = $row['plugin_id'];
-        $modid         = $xoModule->getVar('mid');
+        $groups       = array(XOOPS_GROUP_ANONYMOUS);
+        $sql          = "SELECT plugin_id FROM " . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";
+        $ret          = $xoopsDB->queryF($sql);
+        $row          = $xoopsDB->fetchArray($ret);
+        $item_id      = $row['plugin_id'];
+        $modid        = $xoModule->getVar('mid');
         return $gpermHandler->checkRight('plugin_call', $item_id, $groups, $modid);
     }
 }
@@ -159,7 +159,7 @@ if (!function_exists('xoops_getUserIP')) {
                 $proxy_ip            = $_SERVER["REMOTE_ADDR"];
                 $ret['network-addy'] = @gethostbyaddr($ip);
                 $ret['long']         = @ip2long($ip);
-                if (xoops_isipv6($ip)) {
+                if (xoops_isIPv6($ip)) {
                     $ret['ip6']       = $ip;
                     $ret['proxy-ip6'] = $proxy_ip;
                 } else {
@@ -171,7 +171,7 @@ if (!function_exists('xoops_getUserIP')) {
                 $ip                  = (string)$_SERVER["REMOTE_ADDR"];
                 $ret['network-addy'] = @gethostbyaddr($ip);
                 $ret['long']         = @ip2long($ip);
-                if (xoops_isipv6($ip)) {
+                if (xoops_isIPv6($ip)) {
                     $ret['ip6'] = $ip;
                 } else {
                     $ret['ip4'] = $ip;
@@ -181,7 +181,7 @@ if (!function_exists('xoops_getUserIP')) {
             $ret['is_proxied']   = false;
             $ret['network-addy'] = @gethostbyaddr($ip);
             $ret['long']         = @ip2long($ip);
-            if (xoops_isipv6($ip)) {
+            if (xoops_isIPv6($ip)) {
                 $ret['ip6'] = $ip;
             } else {
                 $ret['ip4'] = $ip;

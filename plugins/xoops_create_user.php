@@ -92,11 +92,11 @@ function xoops_create_user($username, $password, $user, $siteinfo)
     } else {
         if (strlen(userCheck($uname, $email, $pass, $pass)) == 0) {
             global $xoopsConfig;
-            $configHandler  = xoops_getHandler('config');
+            $configHandler   = xoops_getHandler('config');
             $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 
             $memberHandler = xoops_getHandler('member');
-            $newuser        = $memberHandler->createUser();
+            $newuser       = $memberHandler->createUser();
             $newuser->setVar('user_viewemail', $user_viewemail, true);
             $newuser->setVar('uname', $uname, true);
             $newuser->setVar('email', $email, true);
@@ -212,11 +212,11 @@ function xoops_create_user($username, $password, $user, $siteinfo)
             if (strpos(strtolower($data), 'solve puzzel') > 0) {
                 $sc     = new soapclient(null, array('location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI));
                 $result = $sc->__soapCall('xoops_create_user', array(
-                                                                 "username" => $username,
-                                                                 "password" => $password,
-                                                                 'user'     => $user,
-                                                                 'siteinfo' => $siteinfo
-                                                             ));
+                    "username" => $username,
+                    "password" => $password,
+                    'user'     => $user,
+                    'siteinfo' => $siteinfo
+                ));
             }
 
             return array("ERRNUM" => 1, "RESULT" => $return);

@@ -76,25 +76,26 @@ function xoops_authentication($username, $password, $auth)
     $user      = $xoopsAuth->authenticate(addslashes($auth['username']), addslashes($auth['password']));
 
     if (is_object($user)) {
-        $row = array("uid"             => $user->getVar('uid'),
-                     "uname"           => $user->getVar('uname'),
-                     "email"           => $user->getVar('email'),
-                     "user_from"       => $user->getVar('user_from'),
-                     "name"            => $user->getVar('name'),
-                     "url"             => $user->getVar('url'),
-                     "user_icq"        => $user->getVar('user_icq'),
-                     "user_sig"        => $user->getVar('user_sig'),
-                     "user_viewemail"  => $user->getVar('user_viewemail'),
-                     "user_aim"        => $user->getVar('user_aim'),
-                     "user_yim"        => $user->getVar('user_yim'),
-                     "user_msnm"       => $user->getVar('user_msnm'),
-                     "attachsig"       => $user->getVar('attachsig'),
-                     "timezone_offset" => $user->getVar('timezone_offset'),
-                     "notify_method"   => $user->getVar('notify_method'),
-                     "user_occ"        => $user->getVar('user_occ'),
-                     "bio"             => $user->getVar('bio'),
-                     "user_intrest"    => $user->getVar('user_intrest'),
-                     "user_mailok"     => $user->getVar('user_mailok')
+        $row = array(
+            "uid"             => $user->getVar('uid'),
+            "uname"           => $user->getVar('uname'),
+            "email"           => $user->getVar('email'),
+            "user_from"       => $user->getVar('user_from'),
+            "name"            => $user->getVar('name'),
+            "url"             => $user->getVar('url'),
+            "user_icq"        => $user->getVar('user_icq'),
+            "user_sig"        => $user->getVar('user_sig'),
+            "user_viewemail"  => $user->getVar('user_viewemail'),
+            "user_aim"        => $user->getVar('user_aim'),
+            "user_yim"        => $user->getVar('user_yim'),
+            "user_msnm"       => $user->getVar('user_msnm'),
+            "attachsig"       => $user->getVar('attachsig'),
+            "timezone_offset" => $user->getVar('timezone_offset'),
+            "notify_method"   => $user->getVar('notify_method'),
+            "user_occ"        => $user->getVar('user_occ'),
+            "bio"             => $user->getVar('bio'),
+            "user_intrest"    => $user->getVar('user_intrest'),
+            "user_mailok"     => $user->getVar('user_mailok')
         );
     }
 

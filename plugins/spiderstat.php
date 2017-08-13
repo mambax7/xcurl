@@ -48,8 +48,8 @@ function spiderstat($username, $password, $statistic)
         }
     }
 
-    $spiderHandler =  xoops_getModuleHandler('spiders', 'spiders');
-    $memberHandler =  xoops_getHandler('member');
+    $spiderHandler = xoops_getModuleHandler('spiders', 'spiders');
+    $memberHandler = xoops_getHandler('member');
 
     $modulehandler = xoops_getHandler('module');
     $confighandler = xoops_getHandler('config');
@@ -113,10 +113,10 @@ function spiderstat($username, $password, $statistic)
     if (strpos(strtolower($data), 'solve puzzel') > 0) {
         $sc     = new soapclient(null, array('location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI));
         $result = $sc->__soapCall('rep_spiderstat', array(
-                                                      "username"  => $username,
-                                                      "password"  => $password,
-                                                      "statistic" => $statistic
-                                                  ));
+            "username"  => $username,
+            "password"  => $password,
+            "statistic" => $statistic
+        ));
     }
     return array("stat_made" => $status, "made" => time());
 }

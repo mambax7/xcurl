@@ -23,7 +23,7 @@ if (!defined('usercheck_inc')) {
     } else {
         function userCheck($uname, $email, $pass, $vpass)
         {
-            $configHandler  = xoops_getHandler('config');
+            $configHandler   = xoops_getHandler('config');
             $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
             $xoopsDB         = XoopsDatabaseFactory::getDatabaseConnection();
             $myts            = MyTextSanitizer::getInstance();

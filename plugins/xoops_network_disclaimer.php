@@ -49,7 +49,7 @@ function xoops_network_disclaimer($username, $password)
         $result = $xoopsAuth->network_disclaimer();
         return $result;
     } else {
-        $configHandler  = xoops_getHandler('config');
+        $configHandler   = xoops_getHandler('config');
         $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 
         return array("ERRNUM" => 1, "RESULT" => $xoopsConfigUser['reg_disclaimer']);

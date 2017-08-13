@@ -77,7 +77,7 @@ function viewretrieve($var)
         }
         //echo $sql." ".substr($sql_b,0,strlen($str_b)-1)." FROM ".$xoopsDB->prefix(get_viewname($tbl_id))." ".$sql_c;
 
-        $rt = $xoopsDB->queryf($sql . " " . substr($sql_b, 0, strlen($str_b) - 1) . " FROM " . $xoopsDB->prefix(get_viewname($tbl_id)) . " " . $sql_c);
+        $rt = $xoopsDB->queryF($sql . " " . substr($sql_b, 0, strlen($str_b) - 1) . " FROM " . $xoopsDB->prefix(get_viewname($tbl_id)) . " " . $sql_c);
 
         if (!$xoopsDB->getRowsNum($rt)) {
             return array('ErrNum' => 3, "ErrDesc" => 'No Records Returned from Query');

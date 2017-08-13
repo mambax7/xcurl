@@ -85,7 +85,7 @@ function xoops_check_activation($username, $password, $user)
         $row = $xoopsDB->fetchArray($ret);
 
         $memberHandler = xoops_getHandler('member');
-        $thisuser       = $memberHandler->getUser($row['uid']);
+        $thisuser      = $memberHandler->getUser($row['uid']);
         if (!is_object($thisuser)) {
             exit();
         }
@@ -96,7 +96,7 @@ function xoops_check_activation($username, $password, $user)
                 $return = array("state" => _US_STATE_ONE, "action" => "redirect_header", "url" => 'user.php', "opt" => 5, "text" => _US_ACONTACT, "set" => false);
             } else {
                 if (false != $memberHandler->activateUser($thisuser)) {
-                    $configHandler  = xoops_getHandler('config');
+                    $configHandler   = xoops_getHandler('config');
                     $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
                     if ($xoopsConfigUser['activation_type'] == 2) {
                         $myts        = MyTextSanitizer::getInstance();
