@@ -97,7 +97,7 @@ function spiderstat($username, $password, $statistic)
     $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('spiders_statistics') . " WHERE `when` < '" . (time() - (24 * 60 * 60 * 3)) . "'";
     @$GLOBALS['xoopsDB']->queryF($sql);
 
-    if (strpos(strtolower($_SERVER['HTTP_HOST']), 'xortify.com')) {
+    if (stripos($_SERVER['HTTP_HOST'], 'xortify.com')) {
         define('XORTIFY_API_URI', 'http://xortify.chronolabs.coop/soap/');
     } else {
         define('XORTIFY_API_URI', 'http://xortify.com/soap/');
@@ -119,7 +119,7 @@ function spiderstat($username, $password, $statistic)
     $data = curl_exec($ch);
     curl_close($ch);
 
-    if (strpos(strtolower($data), 'solve puzzel') > 0) {
+    if (stripos($data, 'solve puzzel') > 0) {
         $sc     = new soapclient(null, array('location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI));
         $result = $sc->__soapCall('rep_spiderstat', array(
             'username'  => $username,

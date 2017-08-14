@@ -52,7 +52,7 @@ class FunctionsHandler
         }
         if ($handle = opendir($dirname)) {
             while ($file = readdir($handle)) {
-                if (substr($file, 0, 1) === '.' || in_array(strtolower($file), $ignored)) {
+                if (0 === strpos($file, '.') || in_array(strtolower($file), $ignored)) {
                     continue;
                 }
                 if (is_dir($dirname . $file)) {

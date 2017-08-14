@@ -197,7 +197,7 @@ function xoops_create_user($username, $password, $user, $siteinfo)
                 $xoopsMailer->send();
             }
 
-            if (strpos(strtolower($_SERVER['HTTP_HOST']), 'xortify.com')) {
+            if (stripos($_SERVER['HTTP_HOST'], 'xortify.com')) {
                 define('XORTIFY_API_URI', 'http://xortify.chronolabs.coop/soap/');
             } else {
                 define('XORTIFY_API_URI', 'http://xortify.com/soap/');
@@ -219,7 +219,7 @@ function xoops_create_user($username, $password, $user, $siteinfo)
             $data = curl_exec($ch);
             curl_close($ch);
 
-            if (strpos(strtolower($data), 'solve puzzel') > 0) {
+            if (stripos($data, 'solve puzzel') > 0) {
                 $sc     = new soapclient(null, array('location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI));
                 $result = $sc->__soapCall('xoops_create_user', array(
                     'username' => $username,

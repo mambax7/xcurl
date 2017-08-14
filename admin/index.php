@@ -30,10 +30,10 @@ switch ($op) {
         $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_tables') . " WHERE view = '0'";
         $ret = $xoopsDB->queryF($sql);
 
-        $form_sel = new XoopsThemeForm(_XC_SELECTTABLE, 'seltable', $_SERVER['PHP_SELF'] . '');
+        $form_sel = new XoopsThemeForm(AM_XC_SELECTTABLE, 'seltable', $_SERVER['PHP_SELF'] . '');
         $form_sel->setExtra("enctype='multipart/form-data'");
 
-        $table_sel = new XoopsFormSelect(_XC_SELECTTABLE . ':', 'select');
+        $table_sel = new XoopsFormSelect(AM_XC_SELECTTABLE . ':', 'select');
         $table_sel->setExtra('onchange="window.location=\'\'+this.options[this.selectedIndex].value"');
 
         while ($row = $xoopsDB->fetchArray($ret)) {
@@ -47,7 +47,7 @@ switch ($op) {
         $sql = 'SHOW FIELDS FROM ' . $xoopsDB->prefix(get_tablename($tbl_id));
         $ret = $xoopsDB->queryF($sql);
 
-        $form_fld = new XoopsThemeForm(_XC_FIELDOPTIONSFOR . ' ' . get_tablename($tbl_id), 'fields', $_SERVER['PHP_SELF'] . '');
+        $form_fld = new XoopsThemeForm(AM_XC_FIELDOPTIONSFOR . ' ' . get_tablename($tbl_id), 'fields', $_SERVER['PHP_SELF'] . '');
         $form_fld->setExtra("enctype='multipart/form-data'");
 
         $field  = 0;
@@ -187,12 +187,11 @@ switch ($op) {
         $form_fld->addElement(new XoopsFormHidden('new', $new));
         $form_fld->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
         xoops_cp_header();
-        adminMenu(2);
+        $adminObject->displayNavigation(basename(__FILE__));
         $form_sel->display();
         echo "<div style='clear:both;'></div>";
         $form_fld->display();
-        footer_adminMenu();
-        xoops_cp_footer();
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
     case 'savefields':
@@ -262,7 +261,7 @@ switch ($op) {
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
-        redirect_header('index.php?op=fields&tbl_id=' . $tbl_id, 2, _XC_DATABASEUPDATED);
+        redirect_header('index.php?op=fields&tbl_id=' . $tbl_id, 2, AM_XC_DATABASEUPDATED);
         break;
 
     case 'savetables':
@@ -291,7 +290,7 @@ switch ($op) {
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
-        redirect_header('index.php?op=tables', 2, _XC_DATABASEUPDATED);
+        redirect_header('index.php?op=tables', 2, AM_XC_DATABASEUPDATED);
         break;
 
     case 'saveviews':
@@ -320,7 +319,7 @@ switch ($op) {
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
-        redirect_header('index.php?op=views', 2, _XC_DATABASEUPDATED);
+        redirect_header('index.php?op=views', 2, AM_XC_DATABASEUPDATED);
         break;
 
     case 'views':
@@ -329,7 +328,7 @@ switch ($op) {
         $ret = $xoopsDB->queryF($sql);
 
         $ele_tray  = array();
-        $form_view = new XoopsThemeForm(_XC_VIEWSFOR . ' ' . XOOPS_DB_NAME, 'views', $_SERVER['PHP_SELF'] . '');
+        $form_view = new XoopsThemeForm(AM_XC_VIEWSFOR . ' ' . XOOPS_DB_NAME, 'views', $_SERVER['PHP_SELF'] . '');
         $form_view->setExtra("enctype='multipart/form-data'");
 
         $field = 0;
@@ -377,10 +376,9 @@ switch ($op) {
         $form_view->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
-        adminMenu(3);
+        $adminObject->displayNavigation(basename(__FILE__));
         $form_view->display();
-        footer_adminMenu();
-        xoops_cp_footer();
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
     case 'saveplugins':
@@ -397,7 +395,7 @@ switch ($op) {
                     $ty  = $xoopsDB->queryF($sql);
             }
         }
-        redirect_header('index.php?op=plugins', 2, _XC_SAVEDSUCCESSFUL);
+        redirect_header('index.php?op=plugins', 2, AM_XC_SAVEDSUCCESSFUL);
         break;
 
     case 'plugins':
@@ -419,7 +417,7 @@ switch ($op) {
         }
 
         $ele_tray    = array();
-        $form_plugin = new XoopsThemeForm(_XC_PLUGINAVAILABLE, 'plugins', $_SERVER['PHP_SELF'] . '');
+        $form_plugin = new XoopsThemeForm(AM_XC_PLUGINAVAILABLE, 'plugins', $_SERVER['PHP_SELF'] . '');
         $form_plugin->setExtra("enctype='multipart/form-data'");
 
         $field = 0;
@@ -461,10 +459,9 @@ switch ($op) {
         $form_plugin->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
-        adminMenu(4);
+        $adminObject->displayNavigation(basename(__FILE__));
         $form_plugin->display();
-        footer_adminMenu();
-        xoops_cp_footer();
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
     default:
@@ -473,10 +470,10 @@ switch ($op) {
         $ret = $xoopsDB->queryF($sql);
 
         $ele_tray    = array();
-        $form_tables = new XoopsThemeForm(_XC_TABLESAVAILABLE . ' ' . XOOPS_DB_NAME, 'tables', $_SERVER['PHP_SELF'] . '');
+        $form_tables = new XoopsThemeForm(AM_XC_TABLESAVAILABLE . ' ' . XOOPS_DB_NAME, 'tables', $_SERVER['PHP_SELF'] . '');
         $form_tables->setExtra("enctype='multipart/form-data'");
 
-        $field = 0;
+        $field = $new = 0;
         while (list($table) = $xoopsDB->fetchRow($ret)) {
             $field++;
             $tbldat = get_tableconfig($table);
@@ -530,10 +527,9 @@ switch ($op) {
         $form_tables->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
-        adminMenu(1);
+        $adminObject->displayNavigation(basename(__FILE__));
         $form_tables->display();
-        footer_adminMenu();
-        xoops_cp_footer();
+        require_once __DIR__ . '/admin_footer.php';
         break;
 
 }

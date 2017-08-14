@@ -19,7 +19,7 @@ switch ($op) {
         global $xoopsDB, $xoopsModule;
 
         xoops_cp_header();
-        adminmenu(5);
+        $adminObject->displayNavigation(basename(__FILE__));
         // View Categories permissions
         $item_list_view = array();
         $block_view     = array();
@@ -33,7 +33,7 @@ switch ($op) {
                                                                                                                   . XOOPS_URL
                                                                                                                   . '/modules/'
                                                                                                                   . $xoopsModule->dirname()
-                                                                                                                  . "/images/close12.gif alt='' /></a>"
+                                                                                                                  . "/images/close12.gif alt='' ></a>"
                                                                                                                   . _XC_PERMISSIONSVIEWMAN
                                                                                                                   . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">"
                                                                                                                   . _XC_VIEW_FUNCTION
@@ -49,15 +49,14 @@ switch ($op) {
                  . XOOPS_URL
                  . '/modules/'
                  . $xoopsModule->dirname()
-                 . "/images/close12.gif alt='' /></a>&nbsp;"
-                 . _XCOAP_PERMISSIONSVIEWMAN
+                 . "/images/close12.gif alt='' ></a>&nbsp;"
+                 . _XC_PERMISSIONSVIEWMAN
                  . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">"
                  . _XC_NOPERMSSET
                  . '</span>';
         }
         echo '</div>';
 
-        echo "<br />\n";
+        echo "<br >\n";
 }
-footer_adminMenu();
-xoops_cp_footer();
+require_once __DIR__ . '/admin_footer.php';
