@@ -4,27 +4,27 @@
  */
 function spiderstat_xsd()
 {
-    $xsd                                    = array();
+    $xsd                                    = [];
     $i                                      = 0;
-    $data                                   = array();
-    $data[]                                 = array('name' => 'username', 'type' => 'string');
-    $data[]                                 = array('name' => 'password', 'type' => 'string');
-    $datab                                  = array();
-    $datab[]                                = array('name' => 'uri', 'type' => 'string');
-    $datab[]                                = array('name' => 'useragent', 'type' => 'string');
-    $datab[]                                = array('name' => 'netaddy', 'type' => 'string');
-    $datab[]                                = array('name' => 'ip', 'type' => 'string');
-    $datab[]                                = array('name' => 'server-ip', 'type' => 'string');
-    $datab[]                                = array('name' => 'when', 'type' => 'string');
-    $datab[]                                = array('name' => 'sitename', 'type' => 'string');
-    $datab[]                                = array('name' => 'robot-id', 'type' => 'string');
-    $datab[]                                = array('name' => 'robot-name', 'type' => 'string');
-    $data[]                                 = array('items' => array('statistic' => $datab, 'objname' => 'statistic'));
+    $data                                   = [];
+    $data[]                                 = ['name' => 'username', 'type' => 'string'];
+    $data[]                                 = ['name' => 'password', 'type' => 'string'];
+    $datab                                  = [];
+    $datab[]                                = ['name' => 'uri', 'type' => 'string'];
+    $datab[]                                = ['name' => 'useragent', 'type' => 'string'];
+    $datab[]                                = ['name' => 'netaddy', 'type' => 'string'];
+    $datab[]                                = ['name' => 'ip', 'type' => 'string'];
+    $datab[]                                = ['name' => 'server-ip', 'type' => 'string'];
+    $datab[]                                = ['name' => 'when', 'type' => 'string'];
+    $datab[]                                = ['name' => 'sitename', 'type' => 'string'];
+    $datab[]                                = ['name' => 'robot-id', 'type' => 'string'];
+    $datab[]                                = ['name' => 'robot-name', 'type' => 'string'];
+    $data[]                                 = ['items' => ['statistic' => $datab, 'objname' => 'statistic']];
     $xsd['request'][$i]['items']['data']    = $data;
     $xsd['request'][$i]['items']['objname'] = 'data';
 
-    $xsd['response'][] = array('name' => 'ban_made', 'type' => 'boolean');
-    $xsd['response'][] = array('name' => 'made', 'type' => 'integer');
+    $xsd['response'][] = ['name' => 'ban_made', 'type' => 'boolean'];
+    $xsd['response'][] = ['name' => 'made', 'type' => 'integer'];
     return $xsd;
 }
 
@@ -53,7 +53,7 @@ function spiderstat($username, $password, $statistic)
         }
         if (!checkright(basename(__FILE__), $username, $password)) {
             mark_for_lock(basename(__FILE__), $username, $password);
-            return array('ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in');
+            return ['ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in'];
         }
     }
 
@@ -70,7 +70,7 @@ function spiderstat($username, $password, $statistic)
     $ban = $spiderHandler->banDetails($statistic['netaddy']);
 
     if ($ban !== false) {
-        return array('ban_made' => $ban, 'made' => time());
+        return ['ban_made' => $ban, 'made' => time()];
     }
 
     $spiders = $spiderHandler->getObjects(null);
@@ -107,7 +107,7 @@ function spiderstat($username, $password, $statistic)
 
     if (!$ch = curl_init(str_replace('soap', 'ban', XORTIFY_API_URI))) {
         trigger_error('Could not intialise CURLSERIAL file: ' . XORTIFY_API_URI);
-        return array('stat_made' => $status, 'made' => time());
+        return ['stat_made' => $status, 'made' => time()];
     }
     $cookies = XOOPS_VAR_PATH . '/cache/xoops_cache/authcurl_' . md5(XORTIFY_API_URI) . '.cookie';
 
@@ -120,12 +120,12 @@ function spiderstat($username, $password, $statistic)
     curl_close($ch);
 
     if (stripos($data, 'solve puzzel') > 0) {
-        $sc     = new soapclient(null, array('location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI));
-        $result = $sc->__soapCall('rep_spiderstat', array(
+        $sc     = new soapclient(null, ['location' => XORTIFY_API_URI, 'uri' => XORTIFY_API_URI]);
+        $result = $sc->__soapCall('rep_spiderstat', [
             'username'  => $username,
             'password'  => $password,
             'statistic' => $statistic
-        ));
+        ]);
     }
-    return array('stat_made' => $status, 'made' => time());
+    return ['stat_made' => $status, 'made' => time()];
 }

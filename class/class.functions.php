@@ -5,7 +5,7 @@
  */
 class FunctionsHandler
 {
-    public $functions = array();
+    public $functions = [];
 
     /**
      * FunctionsHandler constructor.
@@ -20,8 +20,8 @@ class FunctionsHandler
      */
     public function GetServerExtensions()
     {
-        $files = array();
-        $f     = array();
+        $files = [];
+        $f     = [];
         $files = $this->getFileListAsArray(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/');
         static $f_count;
         static $f_buffer;
@@ -45,8 +45,8 @@ class FunctionsHandler
      */
     public function getDirListAsArray($dirname)
     {
-        $ignored = array();
-        $list    = array();
+        $ignored = [];
+        $list    = [];
         if (substr($dirname, -1) !== '/') {
             $dirname .= '/';
         }
@@ -77,7 +77,7 @@ class FunctionsHandler
      */
     public function getFileListAsArray($dirname, $prefix = '')
     {
-        $filelist = array();
+        $filelist = [];
         if (substr($dirname, -1) === '/') {
             $dirname = substr($dirname, 0, -1);
         }

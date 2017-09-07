@@ -47,7 +47,7 @@ $modversion['author_email']           = 'simon@chronolabs.org.au';
 $modversion['min_php']                = '5.5';
 $modversion['min_xoops']              = '2.5.9';
 $modversion['min_admin']              = '1.2';
-$modversion['min_db']                 = array('mysql' => '5.5');
+$modversion['min_db']                 = ['mysql' => '5.5'];
 $modversion['demo_site_url']          = '';
 $modversion['demo_site_name']         = '';
 $modversion['support_site_url']       = 'http://www.chronolabs.org.au/forums/x-curl/0,10,0,0,100,0,DESC,0';
@@ -155,5 +155,3 @@ $modversion['config'][] = [
         _XC_SECONDS_30   => 30
     ],
 ];
-
-

@@ -6,18 +6,18 @@ include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
  */
 function xoops_network_disclaimer_xsd()
 {
-    $xsd    = array();
+    $xsd    = [];
     $i      = 0;
-    $data   = array();
-    $data[] = array('name' => 'username', 'type' => 'string');
-    $data[] = array('name' => 'password', 'type' => 'string');
+    $data   = [];
+    $data[] = ['name' => 'username', 'type' => 'string'];
+    $data[] = ['name' => 'password', 'type' => 'string'];
     $i++;
     $xsd['request'][$i]['items']['data']    = $data;
     $xsd['request'][$i]['items']['objname'] = 'var';
 
     $i                   = 0;
-    $xsd['response'][$i] = array('name' => 'ERRNUM', 'type' => 'integer');
-    $xsd['response'][$i] = array('name' => 'RESULT', 'type' => 'string');
+    $xsd['response'][$i] = ['name' => 'ERRNUM', 'type' => 'integer'];
+    $xsd['response'][$i] = ['name' => 'RESULT', 'type' => 'string'];
 
     return $xsd;
 }
@@ -45,7 +45,7 @@ function xoops_network_disclaimer($username, $password)
         }
         if (!checkright(basename(__FILE__), $username, $password)) {
             mark_for_lock(basename(__FILE__), $username, $password);
-            return array('ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in');
+            return ['ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in'];
         }
     }
 
@@ -60,6 +60,6 @@ function xoops_network_disclaimer($username, $password)
         $configHandler   = xoops_getHandler('config');
         $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 
-        return array('ERRNUM' => 1, 'RESULT' => $xoopsConfigUser['reg_disclaimer']);
+        return ['ERRNUM' => 1, 'RESULT' => $xoopsConfigUser['reg_disclaimer']];
     }
 }

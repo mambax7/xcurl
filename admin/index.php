@@ -53,7 +53,7 @@ switch ($op) {
         $field  = 0;
         $tbldat = get_tableconfig(get_tablename($tbl_id));
 
-        $ele_tray = array();
+        $ele_tray = [];
 
         while (list($fieldname, $type, $null, $keytype, $tmp, $tmp) = $xoopsDB->fetchRow($ret)) {
             $field++;
@@ -327,7 +327,7 @@ switch ($op) {
         $sql = 'SHOW VIEWS FROM ' . XOOPS_DB_NAME . '';
         $ret = $xoopsDB->queryF($sql);
 
-        $ele_tray  = array();
+        $ele_tray  = [];
         $form_view = new XoopsThemeForm(AM_XC_VIEWSFOR . ' ' . XOOPS_DB_NAME, 'views', $_SERVER['PHP_SELF'] . '');
         $form_view->setExtra("enctype='multipart/form-data'");
 
@@ -404,7 +404,7 @@ switch ($op) {
         require_once '../class/class.functions.php';
         $funct = new FunctionsHandler($xoopsModuleConfig['wsdl']);
 
-        $FunctionDefine = array();
+        $FunctionDefine = [];
         foreach ($funct->GetServerExtensions() as $extension) {
             $phpcode = file_get_contents(XOOPS_ROOT_PATH . '/modules/xcurl/plugins/' . $extension);
             ob_start();
@@ -416,7 +416,7 @@ switch ($op) {
             }
         }
 
-        $ele_tray    = array();
+        $ele_tray    = [];
         $form_plugin = new XoopsThemeForm(AM_XC_PLUGINAVAILABLE, 'plugins', $_SERVER['PHP_SELF'] . '');
         $form_plugin->setExtra("enctype='multipart/form-data'");
 
@@ -469,7 +469,7 @@ switch ($op) {
         $sql = 'SHOW TABLES FROM ' . XOOPS_DB_NAME . " LIKE '" . XOOPS_DB_PREFIX . "\_%'";
         $ret = $xoopsDB->queryF($sql);
 
-        $ele_tray    = array();
+        $ele_tray    = [];
         $form_tables = new XoopsThemeForm(AM_XC_TABLESAVAILABLE . ' ' . XOOPS_DB_NAME, 'tables', $_SERVER['PHP_SELF'] . '');
         $form_tables->setExtra("enctype='multipart/form-data'");
 

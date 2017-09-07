@@ -8,7 +8,7 @@ if (!function_exists('check_siteinfo')) {
     {
         global $xoopsConfig;
         if (!isset($siteinfo) || empty($siteinfo) || !is_array($siteinfo)) {
-            $siteinfo = array();
+            $siteinfo = [];
             $siteinfo['sitename'] == $xoopsConfig['sitename'];
             $siteinfo['adminmail'] == $xoopsConfig['adminmail'];
             $siteinfo['xoops_url'] == XOOPS_URL;

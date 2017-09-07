@@ -34,7 +34,7 @@ if (!function_exists('adminMenu')) {
 
         $myts = MyTextSanitizer::getInstance();
 
-        $tblColors = array();
+        $tblColors = [];
         // $adminmenu=array();
         if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
             include_once XOOPS_ROOT_PATH . '/modules/xcurl/language/' . $xoopsConfig['language'] . '/modinfo.php';

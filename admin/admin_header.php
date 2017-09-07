@@ -30,7 +30,6 @@ if (is_object($GLOBALS['xoopsUser'])) {
     }
 } else {
     $moduleHelper->redirect(XOOPS_URL . '/', 1, _NOPERM);
-
 }
 $myts = MyTextSanitizer::getInstance();
 error_reporting(E_ALL);

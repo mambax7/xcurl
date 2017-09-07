@@ -21,8 +21,8 @@ switch ($op) {
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
         // View Categories permissions
-        $item_list_view = array();
-        $block_view     = array();
+        $item_list_view = [];
+        $block_view     = [];
 
         $result_view = $xoopsDB->query('SELECT plugin_id, plugin_name FROM ' . $xoopsDB->prefix('curl_plugins') . ' ');
         if ($xoopsDB->getRowsNum($result_view)) {
