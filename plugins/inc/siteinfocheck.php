@@ -11,7 +11,7 @@ if (!function_exists('check_siteinfo')) {
             $siteinfo = [];
             $siteinfo['sitename'] == $xoopsConfig['sitename'];
             $siteinfo['adminmail'] == $xoopsConfig['adminmail'];
-            $siteinfo['xoops_url'] == XOOPS_URL;
+            XOOPS_URL == $siteinfo['xoops_url'];
         }
 
         if (!isset($siteinfo['sitename']) && empty($siteinfo['sitename'])) {
@@ -23,7 +23,7 @@ if (!function_exists('check_siteinfo')) {
         }
 
         if (!isset($siteinfo['xoops_url']) && empty($siteinfo['xoops_url'])) {
-            $siteinfo['xoops_url'] == XOOPS_URL;
+            XOOPS_URL == $siteinfo['xoops_url'];
         }
 
         return $siteinfo;

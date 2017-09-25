@@ -47,7 +47,7 @@ function spiderstat($username, $password, $statistic)
 {
     global $xoopsModuleConfig, $xoopsDB;
 
-    if ($xoopsModuleConfig['site_user_auth'] == 1) {
+    if (1 == $xoopsModuleConfig['site_user_auth']) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -69,7 +69,7 @@ function spiderstat($username, $password, $statistic)
 
     $ban = $spiderHandler->banDetails($statistic['netaddy']);
 
-    if ($ban !== false) {
+    if (false !== $ban) {
         return ['ban_made' => $ban, 'made' => time()];
     }
 
