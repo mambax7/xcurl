@@ -9,6 +9,8 @@ define('_XC_ADMINMENU_2', 'Configure Fields');
 define('_XC_ADMINMENU_3', 'Configure Views');
 define('_XC_ADMINMENU_4', 'Configure Plugins');
 define('_XC_ADMINMENU_5', 'Permissions');
+define('_XC_ADMINMENU_HOME', 'Home');
+define('_XC_ADMINMENU_ABOUT', 'About');
 
 define('_XC_PERMISSIONSVIEWMAN', 'Function Call Permissions');
 define('_XC_VIEW_FUNCTION', 'Functions');

@@ -32,7 +32,7 @@ if (!function_exists('adminMenu')) {
 
         // global $xoopsDB, $xoopsModule, $xoopsConfig, $xoopsModuleConfig;
 
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         $tblColors = [];
         // $adminmenu=array();
