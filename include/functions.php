@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Xcurl;
+
 if (!function_exists('adminMenu')) {
     /**
      * @param int $currentoption
@@ -36,11 +38,9 @@ if (!function_exists('adminMenu')) {
 
         $tblColors = [];
         // $adminmenu=array();
-        if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-            include_once XOOPS_ROOT_PATH . '/modules/xcurl/language/' . $xoopsConfig['language'] . '/modinfo.php';
-        } else {
-            include_once XOOPS_ROOT_PATH . '/modules/xcurl/language/english/modinfo.php';
-        }
+        /** @var Xcurl\Helper $helper */
+        $helper = Xcurl\Helper::getInstance();
+        $helper->loadLanguage('modinfo');
 
         echo "<table width=\"100%\" border='0'><tr><td>";
         echo "<div id='buttontop'>";

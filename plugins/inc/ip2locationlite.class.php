@@ -74,7 +74,7 @@ final class ip2location_lite
                 }
 
                 return $result;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->errors[] = $e->getMessage();
                 return;
             }

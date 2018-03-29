@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 /**
  * @return array
  */
@@ -45,9 +48,11 @@ function spiderstat_wsdl_service()
  */
 function spiderstat($username, $password, $statistic)
 {
-    global $xoopsModuleConfig, $xoopsDB;
+    global  $xoopsDB;
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
 
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }

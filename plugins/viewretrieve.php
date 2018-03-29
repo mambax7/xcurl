@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 /**
  * @return array
  */
@@ -43,8 +46,10 @@ function viewretrieve_wsdl_service()
  */
 function viewretrieve($var)
 {
-    global $xoopsModuleConfig;
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
+
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -76,8 +81,8 @@ function viewretrieve($var)
             $sql_c .= 'WHERE ' . $var['clause'] . '';
         }
 
-        global $xoopsModuleConfig;
-        if (1 == $xoopsModuleConfig['site_user_auth']) {
+//        global $xoopsModuleConfig;
+        if (1 == $helper->getConfig('site_user_auth')) {
             if (!validateuser($var['username'], $var['password'])) {
                 return false;
             }
@@ -90,7 +95,7 @@ function viewretrieve($var)
             return ['ErrNum' => 3, 'ErrDesc' => 'No Records Returned from Query'];
         } else {
             $rtn = [];
-            while ($row = $xoopsDB->fetchArray($rt)) {
+            while (false !== ($row = $xoopsDB->fetchArray($rt))) {
                 $rdata = [];
                 foreach ($var['data'] as $data) {
                     $rdata[] = ['fieldname' => $data['field'], 'value' => $row[$data['field']]];

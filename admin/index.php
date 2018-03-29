@@ -1,8 +1,12 @@
 <?php
 
+use XoopsModules\Xcurl;
+/** @var Xcurl\Helper $helper */
+$helper = Xcurl\Helper::getInstance();
+
 include __DIR__ . '/admin_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/../include/functions.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/../include/functions.php';
 
 error_reporting(E_ALL);
 global $xoopsDB;
@@ -30,13 +34,13 @@ switch ($op) {
         $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_tables') . " WHERE view = '0'";
         $ret = $xoopsDB->queryF($sql);
 
-        $form_sel = new XoopsThemeForm(AM_XC_SELECTTABLE, 'seltable', $_SERVER['PHP_SELF'] . '');
+        $form_sel = new \XoopsThemeForm(AM_XC_SELECTTABLE, 'seltable', $_SERVER['PHP_SELF'] . '');
         $form_sel->setExtra("enctype='multipart/form-data'");
 
-        $table_sel = new XoopsFormSelect(AM_XC_SELECTTABLE . ':', 'select');
+        $table_sel = new \XoopsFormSelect(AM_XC_SELECTTABLE . ':', 'select');
         $table_sel->setExtra('onchange="window.location=\'\'+this.options[this.selectedIndex].value"');
 
-        while ($row = $xoopsDB->fetchArray($ret)) {
+        while (false !== ($row = $xoopsDB->fetchArray($ret))) {
             $table_sel->addOption('index.php?op=fields&tbl_id=' . $row['tbl_id'], $row['tablename']);
             if ($tbl_id == $row['tbl_id']) {
                 $table_sel->setValue('index.php?op=fields&tbl_id=' . $row['tbl_id']);
@@ -47,7 +51,7 @@ switch ($op) {
         $sql = 'SHOW FIELDS FROM ' . $xoopsDB->prefix(get_tablename($tbl_id));
         $ret = $xoopsDB->queryF($sql);
 
-        $form_fld = new XoopsThemeForm(AM_XC_FIELDOPTIONSFOR . ' ' . get_tablename($tbl_id), 'fields', $_SERVER['PHP_SELF'] . '');
+        $form_fld = new \XoopsThemeForm(AM_XC_FIELDOPTIONSFOR . ' ' . get_tablename($tbl_id), 'fields', $_SERVER['PHP_SELF'] . '');
         $form_fld->setExtra("enctype='multipart/form-data'");
 
         $field  = 0;
@@ -55,7 +59,7 @@ switch ($op) {
 
         $ele_tray = [];
 
-        while (list($fieldname, $type, $null, $keytype, $tmp, $tmp) = $xoopsDB->fetchRow($ret)) {
+        while (false !== (list($fieldname, $type, $null, $keytype, $tmp, $tmp) = $xoopsDB->fetchRow($ret))) {
             $field++;
 
             $int    = 0;
@@ -83,21 +87,21 @@ switch ($op) {
 
             if (!isset($tbldat)) {
                 $new++;
-                $ele_tray[$field] = new XoopsFormElementTray($fieldname . ' (new)', '&nbsp;', $fieldname);
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", 'new'));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("key[$field]", $key));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("string[$field]", $string));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("int[$field]", $int));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("float[$field]", $float));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("text[$field]", $text));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("other[$field]", $other));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("fieldname[$field]", $fieldname));
+                $ele_tray[$field] = new \XoopsFormElementTray($fieldname . ' (new)', '&nbsp;', $fieldname);
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", 'new'));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("key[$field]", $key));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("string[$field]", $string));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("int[$field]", $int));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("float[$field]", $float));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("text[$field]", $text));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("other[$field]", $other));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("fieldname[$field]", $fieldname));
 
-                $post[$field]     = new XoopsFormCheckBox('Post', "post[$field]");
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]");
-                $update[$field]   = new XoopsFormCheckBox('Update', "update[$field]");
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "visible[$field]");
-                $crc[$field]      = new XoopsFormCheckBox('CRC', "crc[$field]");
+                $post[$field]     = new \XoopsFormCheckBox('Post', "post[$field]");
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]");
+                $update[$field]   = new \XoopsFormCheckBox('Update', "update[$field]");
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "visible[$field]");
+                $crc[$field]      = new \XoopsFormCheckBox('CRC', "crc[$field]");
 
                 $post[$field]->addOption(1, '&nbsp;');
                 $retrieve[$field]->addOption(1, '&nbsp;');
@@ -136,21 +140,21 @@ switch ($op) {
                 }
                 $ele_tray[$field]->addElement($crc[$field]);
             } else {
-                $ele_tray[$field] = new XoopsFormElementTray($fieldname . '', '&nbsp;', $fieldname);
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", $tbldat['fld_id']));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("key[$field]", $key));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("string[$field]", $string));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("int[$field]", $int));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("float[$field]", $float));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("text[$field]", $text));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("other[$field]", $other));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("fieldname[$field]", $fieldname));
+                $ele_tray[$field] = new \XoopsFormElementTray($fieldname . '', '&nbsp;', $fieldname);
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", $tbldat['fld_id']));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("key[$field]", $key));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("string[$field]", $string));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("int[$field]", $int));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("float[$field]", $float));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("text[$field]", $text));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("other[$field]", $other));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("fieldname[$field]", $fieldname));
 
-                $post[$field]     = new XoopsFormCheckBox('Post', "post[$field]", $tbldat['allowpost']);
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]", $tbldat['allowretrieve']);
-                $update[$field]   = new XoopsFormCheckBox('Update', "update[$field]", $tbldat['allowupdate']);
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "visible[$field]", $tbldat['visible']);
-                $crc[$field]      = new XoopsFormCheckBox('CRC', "crc[$field]", $tbldat['crc']);
+                $post[$field]     = new \XoopsFormCheckBox('Post', "post[$field]", $tbldat['allowpost']);
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]", $tbldat['allowretrieve']);
+                $update[$field]   = new \XoopsFormCheckBox('Update', "update[$field]", $tbldat['allowupdate']);
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "visible[$field]", $tbldat['visible']);
+                $crc[$field]      = new \XoopsFormCheckBox('CRC', "crc[$field]", $tbldat['crc']);
 
                 $post[$field]->addOption(1, '&nbsp;');
                 $retrieve[$field]->addOption(1, '&nbsp;');
@@ -182,10 +186,10 @@ switch ($op) {
             $form_fld->addElement($ele_tray[$field]);
         }
 
-        $form_fld->addElement(new XoopsFormHidden('tbl_id', $tbl_id));
-        $form_fld->addElement(new XoopsFormHidden('op', 'savefields'));
-        $form_fld->addElement(new XoopsFormHidden('new', $new));
-        $form_fld->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
+        $form_fld->addElement(new \XoopsFormHidden('tbl_id', $tbl_id));
+        $form_fld->addElement(new \XoopsFormHidden('op', 'savefields'));
+        $form_fld->addElement(new \XoopsFormHidden('new', $new));
+        $form_fld->addElement(new \XoopsFormButton('', 'send', _SUBMIT, 'submit'));
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
         $form_sel->display();
@@ -328,31 +332,31 @@ switch ($op) {
         $ret = $xoopsDB->queryF($sql);
 
         $ele_tray  = [];
-        $form_view = new XoopsThemeForm(AM_XC_VIEWSFOR . ' ' . XOOPS_DB_NAME, 'views', $_SERVER['PHP_SELF'] . '');
+        $form_view = new \XoopsThemeForm(AM_XC_VIEWSFOR . ' ' . XOOPS_DB_NAME, 'views', $_SERVER['PHP_SELF'] . '');
         $form_view->setExtra("enctype='multipart/form-data'");
 
         $field = 0;
-        while (list($table) = $xoopsDB->fetchRow($ret)) {
+        while (false !== (list($table) = $xoopsDB->fetchRow($ret))) {
             $field++;
             $tbldat = get_tableconfig($table);
             if (!isset($tbldat)) {
                 $new++;
-                $ele_tray[$field] = new XoopsFormElementTray($table . ' (new)', '&nbsp;', $table);
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", 'new'));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("viewname[$field]", $table));
+                $ele_tray[$field] = new \XoopsFormElementTray($table . ' (new)', '&nbsp;', $table);
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", 'new'));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("viewname[$field]", $table));
 
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]");
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "post[$field]");
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]");
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "post[$field]");
 
                 $retrieve[$field]->addOption(1, '&nbsp;');
                 $visible[$field]->addOption(1, '&nbsp;');
             } else {
-                $ele_tray[$field] = new XoopsFormElementTray(strip_prefix($table) . '', '&nbsp;', strip_prefix($table));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", $tbldat['tbl_id']));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("viewname[$field]", strip_prefix($table)));
+                $ele_tray[$field] = new \XoopsFormElementTray(strip_prefix($table) . '', '&nbsp;', strip_prefix($table));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", $tbldat['tbl_id']));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("viewname[$field]", strip_prefix($table)));
 
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]");
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "post[$field]");
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]");
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "post[$field]");
 
                 $retrieve[$field]->addOption(1, '&nbsp;');
                 $visible[$field]->addOption(1, '&nbsp;');
@@ -371,9 +375,9 @@ switch ($op) {
             $form_view->addElement($ele_tray[$field]);
         }
 
-        $form_view->addElement(new XoopsFormHidden('op', 'saveviews'));
-        $form_view->addElement(new XoopsFormHidden('new', $new));
-        $form_view->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
+        $form_view->addElement(new \XoopsFormHidden('op', 'saveviews'));
+        $form_view->addElement(new \XoopsFormHidden('new', $new));
+        $form_view->addElement(new \XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
@@ -400,9 +404,11 @@ switch ($op) {
 
     case 'plugins':
         error_reporting(E_ALL);
-        global $xoopsModuleConfig;
+        /** @var Xcurl\Helper $helper */
+        $helper = Xcurl\Helper::getInstance();
+
         require_once '../class/class.functions.php';
-        $funct = new FunctionsHandler($xoopsModuleConfig['wsdl']);
+        $funct = new FunctionsHandler($helper->getConfig('wsdl'));
 
         $FunctionDefine = [];
         foreach ($funct->GetServerExtensions() as $extension) {
@@ -417,7 +423,7 @@ switch ($op) {
         }
 
         $ele_tray    = [];
-        $form_plugin = new XoopsThemeForm(AM_XC_PLUGINAVAILABLE, 'plugins', $_SERVER['PHP_SELF'] . '');
+        $form_plugin = new \XoopsThemeForm(AM_XC_PLUGINAVAILABLE, 'plugins', $_SERVER['PHP_SELF'] . '');
         $form_plugin->setExtra("enctype='multipart/form-data'");
 
         $field = 0;
@@ -428,21 +434,21 @@ switch ($op) {
             if (!isset($functdata)) {
                 $new++;
 
-                $ele_tray[$field] = new XoopsFormElementTray($func . ' (new)', '&nbsp;', $func);
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", 'new'));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("functionname[$field]", str_replace('.php', '', $func)));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("filename[$field]", $func));
+                $ele_tray[$field] = new \XoopsFormElementTray($func . ' (new)', '&nbsp;', $func);
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", 'new'));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("functionname[$field]", str_replace('.php', '', $func)));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("filename[$field]", $func));
 
-                $active[$field] = new XoopsFormCheckBox('Active', "active[$field]");
+                $active[$field] = new \XoopsFormCheckBox('Active', "active[$field]");
                 $active[$field]->addOption(1, '&nbsp;');
                 $ele_tray[$field]->addElement($active[$field]);
             } else {
-                $ele_tray[$field] = new XoopsFormElementTray($func . '', '&nbsp;', $func);
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", $functdata['plugin_id']));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("functionname[$field]", str_replace('.php', '', $func)));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("filename[$field]", $func));
+                $ele_tray[$field] = new \XoopsFormElementTray($func . '', '&nbsp;', $func);
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", $functdata['plugin_id']));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("functionname[$field]", str_replace('.php', '', $func)));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("filename[$field]", $func));
 
-                $active[$field] = new XoopsFormCheckBox('Active', "active[$field]");
+                $active[$field] = new \XoopsFormCheckBox('Active', "active[$field]");
 
                 $active[$field]->addOption(1, '&nbsp;');
 
@@ -454,9 +460,9 @@ switch ($op) {
             $form_plugin->addElement($ele_tray[$field]);
         }
 
-        $form_plugin->addElement(new XoopsFormHidden('op', 'saveplugins'));
-        $form_plugin->addElement(new XoopsFormHidden('new', $new));
-        $form_plugin->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
+        $form_plugin->addElement(new \XoopsFormHidden('op', 'saveplugins'));
+        $form_plugin->addElement(new \XoopsFormHidden('new', $new));
+        $form_plugin->addElement(new \XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
@@ -470,25 +476,25 @@ switch ($op) {
         $ret = $xoopsDB->queryF($sql);
 
         $ele_tray    = [];
-        $form_tables = new XoopsThemeForm(AM_XC_TABLESAVAILABLE . ' ' . XOOPS_DB_NAME, 'tables', $_SERVER['PHP_SELF'] . '');
+        $form_tables = new \XoopsThemeForm(AM_XC_TABLESAVAILABLE . ' ' . XOOPS_DB_NAME, 'tables', $_SERVER['PHP_SELF'] . '');
         $form_tables->setExtra("enctype='multipart/form-data'");
 
         $field = $new = 0;
-        while (list($table) = $xoopsDB->fetchRow($ret)) {
+        while (false !== (list($table) = $xoopsDB->fetchRow($ret))) {
             $field++;
             $tbldat = get_tableconfig($table);
 
             if (!isset($tbldat)) {
                 $new++;
 
-                $ele_tray[$field] = new XoopsFormElementTray(strip_prefix($table) . ' (new)', '&nbsp;', strip_prefix($table));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", 'new'));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("tablename[$field]", strip_prefix($table)));
+                $ele_tray[$field] = new \XoopsFormElementTray(strip_prefix($table) . ' (new)', '&nbsp;', strip_prefix($table));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", 'new'));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("tablename[$field]", strip_prefix($table)));
 
-                $post[$field]     = new XoopsFormCheckBox('Post', "post[$field]", 0);
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]", 0);
-                $update[$field]   = new XoopsFormCheckBox('Update', "update[$field]", 0);
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "visible[$field]", 0);
+                $post[$field]     = new \XoopsFormCheckBox('Post', "post[$field]", 0);
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]", 0);
+                $update[$field]   = new \XoopsFormCheckBox('Update', "update[$field]", 0);
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "visible[$field]", 0);
 
                 $post[$field]->addOption(1, '&nbsp;');
                 $retrieve[$field]->addOption(1, '&nbsp;');
@@ -500,14 +506,14 @@ switch ($op) {
                 $ele_tray[$field]->addElement($update[$field]);
                 $ele_tray[$field]->addElement($visible[$field]);
             } else {
-                $ele_tray[$field] = new XoopsFormElementTray(strip_prefix($table) . '', '&nbsp;', strip_prefix($table));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("id[$field]", $tbldat['tbl_id']));
-                $ele_tray[$field]->addElement(new XoopsFormHidden("tablename[$field]", strip_prefix($table)));
+                $ele_tray[$field] = new \XoopsFormElementTray(strip_prefix($table) . '', '&nbsp;', strip_prefix($table));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("id[$field]", $tbldat['tbl_id']));
+                $ele_tray[$field]->addElement(new \XoopsFormHidden("tablename[$field]", strip_prefix($table)));
 
-                $post[$field]     = new XoopsFormCheckBox('Post', "post[$field]", $tbldat['allowpost']);
-                $retrieve[$field] = new XoopsFormCheckBox('Retrieve', "retrieve[$field]", $tbldat['allowretrieve']);
-                $update[$field]   = new XoopsFormCheckBox('Update', "update[$field]", $tbldat['allowupdate']);
-                $visible[$field]  = new XoopsFormCheckBox('Visible', "visible[$field]", $tbldat['visible']);
+                $post[$field]     = new \XoopsFormCheckBox('Post', "post[$field]", $tbldat['allowpost']);
+                $retrieve[$field] = new \XoopsFormCheckBox('Retrieve', "retrieve[$field]", $tbldat['allowretrieve']);
+                $update[$field]   = new \XoopsFormCheckBox('Update', "update[$field]", $tbldat['allowupdate']);
+                $visible[$field]  = new \XoopsFormCheckBox('Visible', "visible[$field]", $tbldat['visible']);
 
                 $post[$field]->addOption(1, '&nbsp;');
                 $retrieve[$field]->addOption(1, '&nbsp;');
@@ -522,9 +528,9 @@ switch ($op) {
             $form_tables->addElement($ele_tray[$field]);
         }
 
-        $form_tables->addElement(new XoopsFormHidden('op', 'savetables'));
-        $form_tables->addElement(new XoopsFormHidden('new', $new));
-        $form_tables->addElement(new XoopsFormButton('', 'send', _SUBMIT, 'submit'));
+        $form_tables->addElement(new \XoopsFormHidden('op', 'savetables'));
+        $form_tables->addElement(new \XoopsFormHidden('new', $new));
+        $form_tables->addElement(new \XoopsFormButton('', 'send', _SUBMIT, 'submit'));
 
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));

@@ -32,8 +32,8 @@ define('_XC_SECONDS_DESC', 'Period of time for locked function to be invocated o
 define('_XC_SECONDSCACHE', 'Lockout cache stored for');
 define('_XC_SECONDSCACHE_DESC', 'Period of time for cache function to be invocated!');
 
-define('_XC_FUNCTIONSCACHE', 'Function calls are cached for');
-define('_XC_FUNCTIONSCACHE_DESC', 'Period of time for cache function to be invocated!');
+define('_XC_FUNCTIONCACHE', 'Function calls are cached for');
+define('_XC_FUNCTIONCACHE_DESC', 'Period of time for cache function to be invocated!');
 
 define('_XC_SECONDS_3600', '1 Hour');
 define('_XC_SECONDS_1800', '30 minutes');

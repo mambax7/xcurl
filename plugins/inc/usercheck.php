@@ -39,7 +39,7 @@ if (!defined('usercheck_inc')) {
         {
             $configHandler   = xoops_getHandler('config');
             $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-            $xoopsDB         = XoopsDatabaseFactory::getDatabaseConnection();
+            $xoopsDB         = \XoopsDatabaseFactory::getDatabaseConnection();
             $myts            = \MyTextSanitizer::getInstance();
             $stop            = '';
             if (!checkEmail($email)) {

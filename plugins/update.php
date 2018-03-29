@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 /**
  * @return array
  */
@@ -39,8 +42,10 @@ function update_wsdl_service()
  */
 function update($var)
 {
-    global $xoopsModuleConfig;
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
+
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -79,8 +84,8 @@ function update($var)
             return ['ErrNum' => 6, 'ErrDesc' => 'No primary key set'];
         }
 
-        global $xoopsModuleConfig;
-        if (1 == $xoopsModuleConfig['site_user_auth']) {
+//        global $xoopsModuleConfig;
+        if (1 == $helper->getConfig('site_user_auth')) {
             if (!validateuser($var['username'], $var['password'])) {
                 return false;
             }

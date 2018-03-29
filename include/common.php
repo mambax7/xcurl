@@ -74,7 +74,7 @@ function checkright($function_file, $username, $password)
     $xoModule      = $moduleHandler->getByDirname('xcurl');
     if (0 <> $uid) {
         global $xoopsDB, $xoopsModule;
-        $rUser         = new XoopsUser($uid);
+        $rUser         = new \XoopsUser($uid);
         $gpermHandler  = xoops_getHandler('groupperm');
         $groups        = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
         $sql           = 'SELECT plugin_id FROM ' . $xoopsDB->prefix('curl_plugins') . " WHERE plugin_file = '" . addslashes($function_file) . "'";

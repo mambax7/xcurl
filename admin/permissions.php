@@ -1,7 +1,7 @@
 <?php
 
-include_once 'admin_header.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once 'admin_header.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 $op = '';
 
@@ -26,10 +26,10 @@ switch ($op) {
 
         $result_view = $xoopsDB->query('SELECT plugin_id, plugin_name FROM ' . $xoopsDB->prefix('curl_plugins') . ' ');
         if ($xoopsDB->getRowsNum($result_view)) {
-            while ($myrow_view = $xoopsDB->fetchArray($result_view)) {
+            while (false !== ($myrow_view = $xoopsDB->fetchArray($result_view))) {
                 $item_list_view['cid']   = $myrow_view['plugin_id'];
                 $item_list_view['title'] = $myrow_view['plugin_name'];
-                $form_view               = new XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'plugin_call', "<img id='toptableicon' src="
+                $form_view               = new \XoopsGroupPermForm('', $xoopsModule->getVar('mid'), 'plugin_call', "<img id='toptableicon' src="
                                                                                                                   . XOOPS_URL
                                                                                                                   . '/modules/'
                                                                                                                   . $xoopsModule->dirname()

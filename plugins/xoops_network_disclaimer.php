@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 
 /**
@@ -37,9 +40,11 @@ function xoops_network_disclaimer_wsdl_service()
  */
 function xoops_network_disclaimer($username, $password)
 {
-    global $xoopsModuleConfig, $xoopsConfig;
+    global  $xoopsConfig;
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
 
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -49,8 +54,8 @@ function xoops_network_disclaimer($username, $password)
         }
     }
 
-    include_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
-    include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
+    require_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
+    require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
     $xoopsAuth =& XoopsAuthFactory::getAuthConnection();
 
     if (true === check_auth_class($xoopsAuth)) {

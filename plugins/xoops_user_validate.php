@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 
@@ -50,9 +53,11 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
      */
     function xoops_user_validate($username, $password, $validate)
     {
-        global $xoopsModuleConfig, $xoopsConfig;
+        global  $xoopsConfig;
+        /** @var Xcurl\Helper $helper */
+        $helper = Xcurl\Helper::getInstance();
 
-        if (1 == $xoopsModuleConfig['site_user_auth']) {
+        if (1 == $helper->getConfig('site_user_auth')) {
             if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
                 return $ret;
             }
@@ -70,8 +75,8 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
             return ['ERRNUM' => 4, 'ERRTXT' => 'No Passhash'];
         }
 
-        include_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
-        include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
+        require_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
+        require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
         $xoopsAuth =& XoopsAuthFactory::getAuthConnection($myts->addSlashes($validate['uname']));
 
         if (true === check_auth_class($xoopsAuth)) {
@@ -91,9 +96,11 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
      */
     function xoops_user_validate($username, $password, $validate)
     {
-        global $xoopsModuleConfig, $xoopsConfig;
+        global  $xoopsConfig;
+        /** @var Xcurl\Helper $helper */
+        $helper = Xcurl\Helper::getInstance();
 
-        if (1 == $xoopsModuleConfig['site_user_auth']) {
+        if (1 == $helper->getConfig('site_user_auth')) {
             if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
                 return $ret;
             }

@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 /**
  * @return array
  */
@@ -42,9 +45,11 @@ function retrievecrc_wsdl_service()
  */
 function retrievecrc($var)
 {
-    global $xoopsModuleConfig;
 
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
+
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -69,7 +74,8 @@ function retrievecrc($var)
     $ret = $xoopsDB->query($sql);
     $sql = 'SELECT ';
     $tmp = [];
-    while ($row = $xoopsDB->fetchArray($ret)) {
+    $t = 0;
+    while (false !== ($row = $xoopsDB->fetchArray($ret))) {
         $sql   .= '`' . $row['fieldname'] . '`';
         $tmp[] = $row['fieldname'];
         $t++;
@@ -91,8 +97,9 @@ function retrievecrc($var)
 
     $ret = $xoopsDB->query($sql);
     $rtn = [];
+    $id = 0;
 
-    while ($row = $xoopsDB->fetchArray($ret)) {
+    while (false !== ($row = $xoopsDB->fetchArray($ret))) {
         $id++;
         $tmp_b = [];
         $crc   = '';
@@ -107,8 +114,7 @@ function retrievecrc($var)
         ];
     }
 
-    global $xoopsModuleConfig;
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    if (1 == $helper->getConfig('site_user_auth')) {
         if (!validateuser($var['username'], $var['password'])) {
             return false;
         }

@@ -1,5 +1,9 @@
 <?php
 
+use XoopsModules\Xcurl;
+/** @var Xcurl\Helper $helper */
+$helper = Xcurl\Helper::getInstance();
+
 /**
  * @return array
  */
@@ -39,9 +43,12 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
      */
     function arpmacaddress($username, $password, $remoteaddress)
     {
-        global $xoopsModuleConfig, $xoopsConfig;
+        global  $xoopsConfig;
 
-        if (1 == $xoopsModuleConfig['site_user_auth']) {
+        /** @var Xcurl\Helper $helper */
+        $helper = Xcurl\Helper::getInstance();
+
+        if (1 == $helper->getConfig('site_user_auth')) {
             if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
                 return $ret;
             }

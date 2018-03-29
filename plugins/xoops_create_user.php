@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/usercheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/authcheck.php';
 include XOOPS_ROOT_PATH . '/modules/xcurl/plugins/inc/siteinfocheck.php';
@@ -68,9 +71,11 @@ function xoops_create_user($username, $password, $user, $siteinfo)
 {
     xoops_load('userUtility');
 
-    global $xoopsModuleConfig, $xoopsConfig;
+    global  $xoopsConfig;
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
 
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -92,8 +97,8 @@ function xoops_create_user($username, $password, $user, $siteinfo)
         ${$k} = $l;
     }
 
-    include_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
-    include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
+    require_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
+    require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
     $xoopsAuth =& XoopsAuthFactory::getAuthConnection($uname);
 
     if (true === check_auth_class($xoopsAuth)) {
@@ -149,7 +154,7 @@ function xoops_create_user($username, $password, $user, $siteinfo)
                     $xoopsMailer->assign('SITENAME', $siteinfo['sitename']);
                     $xoopsMailer->assign('ADMINMAIL', $siteinfo['adminmail']);
                     $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
-                    $xoopsMailer->setToUsers(new XoopsUser($newid));
+                    $xoopsMailer->setToUsers(new \XoopsUser($newid));
                     $xoopsMailer->setFromEmail($siteinfo['adminmail']);
                     $xoopsMailer->setFromName($siteinfo['sitename']);
                     $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $uname));

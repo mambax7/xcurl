@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Xcurl;
+
 /**
  * @return array
  */
@@ -36,8 +39,10 @@ function tablesforpost_wsdl_service()
  */
 function tablesforpost($var)
 {
-    global $xoopsModuleConfig;
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+    /** @var Xcurl\Helper $helper */
+    $helper = Xcurl\Helper::getInstance();
+
+    if (1 == $helper->getConfig('site_user_auth')) {
         if ($ret = check_for_lock(basename(__FILE__), $username, $password)) {
             return $ret;
         }
@@ -50,7 +55,7 @@ function tablesforpost($var)
     $sql = 'SELECT * FROM ' . $xoopsDB->prefix('curl_tables') . ' WHERE allowpost = 1 AND visible = 1';
     $ret = $xoopsDB->query($sql);
     $rtn = [];
-    while ($row = $xoopsDB->fetchArray($ret)) {
+    while (false !== ($row = $xoopsDB->fetchArray($ret))) {
         $t++;
         $rtn[$t] = [
             'id'    => $row['tbl_id'],
@@ -58,8 +63,8 @@ function tablesforpost($var)
         ];
     }
 
-    global $xoopsModuleConfig;
-    if (1 == $xoopsModuleConfig['site_user_auth']) {
+//    global $xoopsModuleConfig;
+    if (1 == $helper->getConfig('site_user_auth')) {
         if (!validateuser($var['username'], $var['password'])) {
             return false;
         }
