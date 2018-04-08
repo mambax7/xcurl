@@ -407,7 +407,7 @@ switch ($op) {
         /** @var Xcurl\Helper $helper */
         $helper = Xcurl\Helper::getInstance();
 
-        require_once '../class/class.functions.php';
+        require_once __DIR__ . '/../class/class.functions.php';
         $funct = new FunctionsHandler($helper->getConfig('wsdl'));
 
         $FunctionDefine = [];
