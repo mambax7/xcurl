@@ -1,12 +1,13 @@
 <?php
 
 use XoopsModules\Xcurl;
-/** @var Xcurl\Helper $helper */
-$helper = Xcurl\Helper::getInstance();
 
 include __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once __DIR__ . '/../include/functions.php';
+require_once  dirname(__DIR__) . '/include/functions.php';
+
+/** @var Xcurl\Helper $helper */
+$helper = Xcurl\Helper::getInstance();
 
 error_reporting(E_ALL);
 global $xoopsDB;
@@ -407,7 +408,7 @@ switch ($op) {
         /** @var Xcurl\Helper $helper */
         $helper = Xcurl\Helper::getInstance();
 
-        require_once __DIR__ . '/../class/class.functions.php';
+        require_once  dirname(__DIR__) . '/class/class.functions.php';
         $funct = new FunctionsHandler($helper->getConfig('wsdl'));
 
         $FunctionDefine = [];

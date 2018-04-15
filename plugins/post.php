@@ -1,8 +1,6 @@
 <?php
 
 use XoopsModules\Xcurl;
-/** @var Xcurl\Helper $helper */
-$helper = Xcurl\Helper::getInstance();
 
 /**
  * @return array

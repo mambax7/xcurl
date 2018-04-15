@@ -10,6 +10,7 @@ if (!function_exists('adminMenu')) {
     {
         /* Nice buttons styles */
         global $xoopsConfig, $xoopsModule;
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $xoopsModule   = $moduleHandler->getByDirname('xcurl');
         $dirname       = $xoopsModule->getVar('dirname');

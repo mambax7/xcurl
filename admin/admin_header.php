@@ -11,8 +11,8 @@
 use XoopsModules\Xcurl;
 
 error_reporting(E_ALL);
-require_once __DIR__ . '/../../../include/cp_header.php';
-include __DIR__ . '/../include/functions.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include  dirname(__DIR__) . '/include/functions.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
