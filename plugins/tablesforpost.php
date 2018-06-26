@@ -71,3 +71,4 @@ function tablesforpost($var)
     }
     return $rtn;
 }
+?>

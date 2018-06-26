@@ -146,3 +146,4 @@ function xoops_check_activation($username, $password, $user)
         return $return;
     }
 }
+?>

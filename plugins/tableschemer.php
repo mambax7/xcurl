@@ -106,3 +106,4 @@ function tableschemer($var)
     }
     return $rtn;
 }
+?>

@@ -71,3 +71,4 @@ function tablesforretrieve($var)
     }
     return $rtn;
 }
+?>

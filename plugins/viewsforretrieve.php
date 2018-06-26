@@ -71,3 +71,4 @@ function viewsforretrieve($var)
     }
     return $rtn;
 }
+?>

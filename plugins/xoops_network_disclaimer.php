@@ -56,7 +56,7 @@ function xoops_network_disclaimer($username, $password)
 
     require_once XOOPS_ROOT_PATH . '/class/auth/authfactory.php';
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/auth.php';
-    $xoopsAuth =& XoopsAuthFactory::getAuthConnection();
+    $xoopsAuth = XoopsAuthFactory::getAuthConnection();
 
     if (true === check_auth_class($xoopsAuth)) {
         $result = $xoopsAuth->network_disclaimer();
@@ -68,3 +68,4 @@ function xoops_network_disclaimer($username, $password)
         return ['ERRNUM' => 1, 'RESULT' => $xoopsConfigUser['reg_disclaimer']];
     }
 }
+?>

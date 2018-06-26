@@ -240,3 +240,4 @@ function xoops_create_user($username, $password, $user, $siteinfo)
         }
     }
 }
+?>

@@ -63,3 +63,5 @@ if ($ret[0] >= 2 && $ret[1] >= 3) {
         return ['MACADDRESS' => $macaddress];
     }
 }
+?>
+

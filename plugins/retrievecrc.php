@@ -121,3 +121,4 @@ function retrievecrc($var)
     }
     return $rtn;
 }
+?>

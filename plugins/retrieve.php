@@ -1,6 +1,6 @@
 <?php
 
-use XoopsModules\Xcurl;
+use XoopsModules\Xjson;
 
 /**
  * @return array
@@ -42,7 +42,7 @@ function retrieve_wsdl_service()
 // Define the method as a PHP function
 /**
  * @param $var
- * @return array
+ * @return array|bool
  */
 function retrieve($var)
 {
@@ -111,3 +111,4 @@ function retrieve($var)
         return ['total_records' => $xoopsDB->getRowsNum($rt), 'items' => $rtn];
     }
 }
+?>

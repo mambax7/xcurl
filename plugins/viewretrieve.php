@@ -107,3 +107,4 @@ function viewretrieve($var)
         return ['total_records' => $xoopsDB->getRowsNum($rt), 'data' => $rtn];
     }
 }
+?>

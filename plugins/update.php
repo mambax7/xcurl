@@ -93,3 +93,4 @@ function update($var)
         return $xoopsDB->queryF($sql . substr($sql_b, 0, -1) . $sql_c);
     }
 }
+?>

@@ -81,3 +81,4 @@ function post($var)
         return ['insert_id' => $xoopsDB->getInsertId($rt)];
     }
 }
+?>
