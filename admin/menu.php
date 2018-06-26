@@ -4,6 +4,7 @@ use XoopsModules\Xcurl;
 
 // require_once  dirname(__DIR__) . '/class/Helper.php';
 //require_once  dirname(__DIR__) . '/include/common.php';
+/** @var Xcurl\Helper $helper */
 $helper = Xcurl\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');

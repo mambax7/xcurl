@@ -2,7 +2,7 @@
 
 use XoopsModules\Xcurl;
 
-include __DIR__ . '/admin_header.php';
+require_once __DIR__   . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once  dirname(__DIR__) . '/include/functions.php';
 

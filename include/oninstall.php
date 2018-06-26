@@ -30,7 +30,7 @@ use XoopsModules\Xcurl;
  */
 function xoops_module_pre_install_xcurl(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var Xcurl\Utility $utility */
     $utility = new \XoopsModules\Xcurl\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -60,6 +60,7 @@ function xoops_module_install_xcurl(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
+    /** @var Xcurl\Helper $helper */
     $helper       = Xcurl\Helper::getInstance();
     $utility      = new Xcurl\Utility();
     $configurator = new Xcurl\Common\Configurator();

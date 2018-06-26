@@ -12,13 +12,14 @@ use XoopsModules\Xcurl;
 
 error_reporting(E_ALL);
 require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include  dirname(__DIR__) . '/include/functions.php';
+require_once dirname(__DIR__) . '/include/functions.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+/** @var Xcurl\Helper $helper */
 $helper = Xcurl\Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
 $adminObject = Xmf\Module\Admin::getInstance();
